@@ -23,7 +23,7 @@ body{background:#fdf6e3;background-image:radial-gradient(#e8d9b0 1px,transparent
 .lmsg.ok{color:#166534;background:#dcfce7;border:2px solid #166534}
 #appScreen{display:none;padding-bottom:120px}
 .header{background:#dc2626;border-bottom:4px solid #1a1a1a;padding:16px 18px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:50;box-shadow:0 4px 0 #1a1a1a}
-.header .menu-btn{width:42px;height:42px;background:#fff;border:3px solid #1a1a1a;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;box-shadow:3px 3px 0 #1a1a1a;font-weight:900}
+.header .menu-btn{width:42px;height:42px;background:#fff;border:3px solid #1a1a1a;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;box-shadow:3px 3px 0 #1a1a1a;font-weight:900;cursor:pointer}
 .header .title{flex:1;text-align:center;font-family:'Archivo Black',sans-serif;font-size:20px;color:#fff;letter-spacing:1px;text-shadow:2px 2px 0 #1a1a1a}
 .header .icons{display:flex;gap:8px}
 .header .icons .ico{width:42px;height:42px;background:#fff;border:3px solid #1a1a1a;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:18px;box-shadow:3px 3px 0 #1a1a1a;cursor:pointer}
@@ -51,10 +51,10 @@ body{background:#fdf6e3;background-image:radial-gradient(#e8d9b0 1px,transparent
 .card h3{font-family:'Archivo Black',sans-serif;font-size:15px;text-transform:uppercase;margin-bottom:4px;line-height:1.2}
 .card p{font-size:11px;color:#555;font-weight:600;line-height:1.4}
 .card .char{position:absolute;top:8px;right:8px;font-size:34px;transform:rotate(-10deg)}
-.strip-red{background:#dc2626}.strip-green{background:#16a34a}.strip-blue{background:#2563eb}.strip-yellow{background:#fbbf24}
-.bottom-nav{position:fixed;bottom:0;left:0;right:0;background:#fdf6e3;border-top:4px solid #1a1a1a;display:flex;padding:10px 8px 14px;z-index:100;justify-content:space-around;align-items:flex-end}
-.nav-item{flex:1;text-align:center;font-size:10px;font-weight:800;cursor:pointer;color:#1a1a1a;padding:6px 2px}
-.nav-item .ico{display:flex;align-items:center;justify-content:center;width:48px;height:48px;background:#fff;border:3px solid #1a1a1a;border-radius:12px;font-size:20px;margin:0 auto 6px;box-shadow:3px 3px 0 #1a1a1a}
+.strip-red{background:#dc2626}.strip-green{background:#16a34a}.strip-blue{background:#2563eb}.strip-yellow{background:#fbbf24}.strip-teal{background:#0d9488}.strip-purple{background:#7c3aed}
+.bottom-nav{position:fixed;bottom:0;left:0;right:0;background:#fdf6e3;border-top:4px solid #1a1a1a;display:flex;padding:10px 4px 14px;z-index:100;justify-content:space-around;align-items:flex-end;overflow-x:auto}
+.nav-item{flex:1;min-width:56px;text-align:center;font-size:9px;font-weight:800;cursor:pointer;color:#1a1a1a;padding:6px 2px}
+.nav-item .ico{display:flex;align-items:center;justify-content:center;width:42px;height:42px;background:#fff;border:3px solid #1a1a1a;border-radius:12px;font-size:18px;margin:0 auto 6px;box-shadow:3px 3px 0 #1a1a1a}
 .nav-item.active .ico{background:#fbbf24}
 .modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:999;padding:20px;overflow-y:auto}
 .modal-bg.show{display:block}
@@ -81,9 +81,46 @@ body{background:#fdf6e3;background-image:radial-gradient(#e8d9b0 1px,transparent
 .box .l{font-size:10px;color:#666;text-transform:uppercase;font-weight:800}
 .box .v{font-size:14px;font-weight:800;word-break:break-all;margin-top:2px}
 .loading{text-align:center;font-weight:800;display:none;margin-top:12px;font-size:13px}
+.sidebar{position:fixed;top:0;left:-100%;width:290px;height:100vh;background:#fff;border-right:4px solid #1a1a1a;z-index:1000;transition:left .3s ease;overflow-y:auto}
+.sidebar.show{left:0}
+.sb-head{background:#dc2626;border-bottom:4px solid #1a1a1a;padding:16px 18px;display:flex;align-items:center;justify-content:space-between}
+.sb-head h3{font-family:'Archivo Black',sans-serif;font-size:15px;color:#fff;text-transform:uppercase;text-shadow:2px 2px 0 #1a1a1a}
+.sb-close{width:32px;height:32px;background:#fff;border:3px solid #1a1a1a;border-radius:8px;font-weight:900;cursor:pointer;font-size:14px}
+.sb-body{padding:14px}
+.sb-user{background:#fdf6e3;border:3px solid #1a1a1a;border-radius:12px;padding:10px 12px;margin-bottom:10px}
+.sb-user .top{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+.sb-user .nm{font-weight:800;font-size:13px}
+.sb-user .rl{font-size:10px;font-weight:800;padding:2px 8px;border-radius:10px;border:2px solid #1a1a1a;color:#fff}
+.sb-user .row{font-size:11px;font-weight:700;color:#444;margin-top:3px}
+.sb-user .row b{color:#1a1a1a}
+.sb-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:999}
+.sb-overlay.show{display:block}
+.sb-empty{text-align:center;padding:30px;color:#888;font-weight:700;font-size:13px}
+.sb-actions{display:flex;gap:6px;margin-top:8px}
+.sb-btn{flex:1;padding:8px;border:2px solid #1a1a1a;border-radius:8px;font-size:11px;font-weight:800;cursor:pointer;text-transform:uppercase;box-shadow:2px 2px 0 #1a1a1a}
+.sb-btn.edit{background:#fbbf24;color:#1a1a1a}
+.sb-btn.del{background:#dc2626;color:#fff}
+.sb-btn:active{transform:translate(1px,1px);box-shadow:1px 1px 0 #1a1a1a}
+.sb-add{width:100%;padding:12px;background:#16a34a;color:#fff;border:3px solid #1a1a1a;border-radius:12px;font-size:13px;font-weight:800;cursor:pointer;box-shadow:3px 3px 0 #1a1a1a;text-transform:uppercase;margin-bottom:12px;font-family:inherit}
+.edit-form{background:#fff;border:3px solid #1a1a1a;border-radius:12px;padding:12px;margin-top:8px;display:none}
+.edit-form.show{display:block}
+.edit-form label{display:block;font-size:11px;font-weight:800;margin:6px 0 4px;text-transform:uppercase}
+.edit-form input,.edit-form select{width:100%;padding:8px;border:2px solid #1a1a1a;border-radius:8px;font-size:12px;font-weight:600;background:#fdf6e3;font-family:inherit;outline:none}
+.edit-form .btns{display:flex;gap:6px;margin-top:10px}
+.edit-form .btns button{flex:1;padding:8px;border:2px solid #1a1a1a;border-radius:8px;font-size:11px;font-weight:800;cursor:pointer;text-transform:uppercase;box-shadow:2px 2px 0 #1a1a1a}
+.btn-save{background:#16a34a;color:#fff}
+.btn-cancel{background:#666;color:#fff}
 </style>
 </head>
 <body>
+<div class="sb-overlay" id="sbOverlay" onclick="closeSb()"></div>
+<div class="sidebar" id="sidebar">
+  <div class="sb-head">
+    <h3>👥 Daftar User</h3>
+    <button class="sb-close" onclick="closeSb()">✕</button>
+  </div>
+  <div class="sb-body" id="sbBody"></div>
+</div>
 
 <div id="loginScreen">
   <div class="lcard">
@@ -101,7 +138,7 @@ body{background:#fdf6e3;background-image:radial-gradient(#e8d9b0 1px,transparent
 
 <div id="appScreen">
   <div class="header">
-    <div class="menu-btn">☰</div>
+    <div class="menu-btn" onclick="openSb()">☰</div>
     <div class="title">AZKA PANEL</div>
     <div class="icons">
       <div class="ico" onclick="doLogout()">🚪</div>
@@ -134,11 +171,12 @@ body{background:#fdf6e3;background-image:radial-gradient(#e8d9b0 1px,transparent
     <div class="grid" id="grid"></div>
   </div>
   <div class="bottom-nav">
-    <div class="nav-item active" onclick="filterKat('all',this)"><div class="ico">🏠</div>BERANDA</div>
-    <div class="nav-item" onclick="filterKat('downloader',this)"><div class="ico">📥</div>DOWNLOAD</div>
-    <div class="nav-item" onclick="filterKat('stalker',this)"><div class="ico">🕵️</div>STALKER</div>
+    <div class="nav-item active" onclick="filterKat('all',this)"><div class="ico">🏠</div>HOME</div>
+    <div class="nav-item" onclick="filterKat('downloader',this)"><div class="ico">📥</div>DL</div>
+    <div class="nav-item" onclick="filterKat('stalker',this)"><div class="ico">🕵️</div>STALK</div>
+    <div class="nav-item" onclick="filterKat('islami',this)"><div class="ico">🕌</div>ISLAMI</div>
     <div class="nav-item" onclick="filterKat('ai',this)"><div class="ico">🤖</div>AI</div>
-    <div class="nav-item" onclick="filterKat('utility',this)"><div class="ico">🧰</div>UTILITY</div>
+    <div class="nav-item" onclick="filterKat('utility',this)"><div class="ico">🧰</div>UTIL</div>
   </div>
 </div>
 
@@ -180,9 +218,8 @@ async function doLogin(){
   btn.disabled=false;btn.innerText='Masuk';
   if(!user){msg.className='lmsg err';msg.innerText='Username gak terdaftar!';return;}
   if(user.password!==p){msg.className='lmsg err';msg.innerText='Password salah!';return;}
-  
-  var roleBebasExpired = ['developer','owner','admin'];
-  if(roleBebasExpired.indexOf(user.role) === -1 && user.expired){
+  var roleBebasExpired=['developer','owner','admin'];
+  if(roleBebasExpired.indexOf(user.role)===-1 && user.expired){
     var today=new Date();
     var expDate=new Date(user.expired);
     if(expDate<today){
@@ -191,7 +228,6 @@ async function doLogin(){
       return;
     }
   }
-  
   msg.className='lmsg ok';msg.innerText='Login berhasil!';
   localStorage.setItem('azka_user',JSON.stringify({nama:user.nama,role:user.role||'user'}));
   setTimeout(showApp,600);
@@ -218,37 +254,17 @@ function renderDashboard(u){
   var role=u.role||'user';
   var hariIni=new Date();
   var tgl=hariIni.toLocaleDateString('id-ID',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
-  
   document.getElementById('dashAvatar').innerText=u.nama.charAt(0).toUpperCase();
   document.getElementById('dashName').innerText=u.nama;
-  
-  var roleLabel = {
-    'developer': '⚡ Developer',
-    'owner': '🔱 Owner',
-    'admin': '👑 Admin',
-    'moderator': '🛡️ Moderator',
-    'vip': '💎 VIP',
-    'reseller': '🏪 Reseller',
-    'user': '👤 Member'
-  };
-  var roleColor = {
-    'developer': '#8b5cf6',
-    'owner': '#dc2626',
-    'admin': '#f59e0b',
-    'moderator': '#3b82f6',
-    'vip': '#ec4899',
-    'reseller': '#16a34a',
-    'user': '#666'
-  };
-  document.getElementById('dashRole').innerText = roleLabel[role] || ('👤 ' + role);
-  document.getElementById('dashRole').style.color = roleColor[role] || '#666';
+  var roleLabel={'developer':'⚡ Developer','owner':'🔱 Owner','admin':'👑 Admin','moderator':'🛡️ Moderator','vip':'💎 VIP','reseller':'🏪 Reseller','user':'👤 Member'};
+  var roleColor={'developer':'#8b5cf6','owner':'#dc2626','admin':'#f59e0b','moderator':'#3b82f6','vip':'#ec4899','reseller':'#16a34a','user':'#666'};
+  document.getElementById('dashRole').innerText=roleLabel[role]||('👤 '+role);
+  document.getElementById('dashRole').style.color=roleColor[role]||'#666';
   document.getElementById('dashToday').innerText=tgl;
-  
   var warn=document.getElementById('dashWarn');
   warn.style.display='none';
-  
-  var roleBebasExpired = ['developer','owner','admin'];
-  if(roleBebasExpired.indexOf(role) !== -1){
+  var roleBebasExpired=['developer','owner','admin'];
+  if(roleBebasExpired.indexOf(role)!==-1){
     document.getElementById('dashExp').innerText='∞ Permanen';
     document.getElementById('dashExp').style.color='#16a34a';
   }else{
@@ -262,18 +278,12 @@ function renderDashboard(u){
       document.getElementById('dashExp').innerText=expDate.toLocaleDateString('id-ID',{day:'numeric',month:'short',year:'numeric'});
       if(sisaHari<0){
         document.getElementById('dashExp').style.color='#991b1b';
-        warn.style.display='block';
-        warn.style.background='#fee2e2';
-        warn.style.color='#991b1b';
-        warn.style.border='2px solid #991b1b';
+        warn.style.display='block';warn.style.background='#fee2e2';warn.style.color='#991b1b';warn.style.border='2px solid #991b1b';
         warn.innerText='⚠️ Akun sudah expired '+Math.abs(sisaHari)+' hari lalu!';
       }else if(sisaHari<=7){
         document.getElementById('dashExp').style.color='#f59e0b';
-        warn.style.display='block';
-        warn.style.background='#fef3c7';
-        warn.style.color='#92400e';
-        warn.style.border='2px solid #f59e0b';
-        warn.innerText='⚠️ Akun akan expired dalam '+sisaHari+' hari! Segera perpanjang.';
+        warn.style.display='block';warn.style.background='#fef3c7';warn.style.color='#92400e';warn.style.border='2px solid #f59e0b';
+        warn.innerText='⚠️ Akun akan expired dalam '+sisaHari+' hari!';
       }else{
         document.getElementById('dashExp').style.color='#16a34a';
       }
@@ -288,6 +298,118 @@ function filterKat(id,el){
   render();
 }
 
+function openSb(){
+  var u=JSON.parse(localStorage.getItem('azka_user')||'{}');
+  var role=u.role||'user';
+  if(role!=='developer'&&role!=='owner'){
+    alert('⚠️ Cuma Developer & Owner yang bisa akses!');
+    return;
+  }
+  renderSb();
+  document.getElementById('sidebar').classList.add('show');
+  document.getElementById('sbOverlay').classList.add('show');
+}
+
+function closeSb(){
+  document.getElementById('sidebar').classList.remove('show');
+  document.getElementById('sbOverlay').classList.remove('show');
+}
+
+function renderSb(){
+  var body=document.getElementById('sbBody');
+  var u=JSON.parse(localStorage.getItem('azka_user')||'{}');
+  var role=u.role||'user';
+  var bisaEdit=(role==='developer'||role==='owner');
+  if(!USERS||USERS.length===0){
+    body.innerHTML='<div class="sb-empty">Belum ada user</div>';
+    return;
+  }
+  var h='';
+  if(bisaEdit){
+    h+='<button class="sb-add" onclick="showAddForm()">➕ Tambah User</button>';
+    h+='<div class="edit-form" id="addForm">';
+    h+='<label>Username</label><input type="text" id="addNama" placeholder="username">';
+    h+='<label>Password</label><input type="text" id="addPw" placeholder="password">';
+    h+='<label>Role</label><select id="addRole"><option value="user">user</option><option value="vip">vip</option><option value="reseller">reseller</option><option value="moderator">moderator</option><option value="admin">admin</option><option value="owner">owner</option></select>';
+    h+='<label>Expired (kosongin kalo permanen)</label><input type="text" id="addExp" placeholder="2027-12-31">';
+    h+='<div class="btns"><button class="btn-save" onclick="addUser()">Simpan</button><button class="btn-cancel" onclick="hideAddForm()">Batal</button></div>';
+    h+='</div>';
+  }
+  USERS.forEach(function(x, idx){
+    var roleColor={'developer':'#8b5cf6','owner':'#dc2626','admin':'#f59e0b','moderator':'#3b82f6','vip':'#ec4899','reseller':'#16a34a','user':'#666'};
+    h+='<div class="sb-user">';
+    h+='<div class="top"><span class="nm">'+x.nama+'</span>';
+    h+='<span class="rl" style="background:'+(roleColor[x.role]||'#666')+'">'+(x.role||'user').toUpperCase()+'</span></div>';
+    h+='<div class="row">👤 Username: <b>'+x.nama+'</b></div>';
+    h+='<div class="row">🔑 Password: <b>'+x.password+'</b></div>';
+    h+='<div class="row">⏰ Expired: <b>'+(x.expired||'∞ Permanen')+'</b></div>';
+    if(bisaEdit){
+      h+='<div class="sb-actions">';
+      h+='<button class="sb-btn edit" onclick="showEditForm('+idx+')">✏️ Edit</button>';
+      h+='<button class="sb-btn del" onclick="delUser('+idx+')">🗑️ Hapus</button>';
+      h+='</div>';
+      h+='<div class="edit-form" id="editForm'+idx+'">';
+      h+='<label>Username</label><input type="text" id="editNama'+idx+'" value="'+x.nama+'">';
+      h+='<label>Password</label><input type="text" id="editPw'+idx+'" value="'+x.password+'">';
+      h+='<label>Role</label><select id="editRole'+idx+'">';
+      ['developer','owner','admin','moderator','vip','reseller','user'].forEach(function(r){
+        h+='<option value="'+r+'"'+(x.role===r?' selected':'')+'>'+r+'</option>';
+      });
+      h+='</select>';
+      h+='<label>Expired (kosongin kalo permanen)</label><input type="text" id="editExp'+idx+'" value="'+(x.expired||'')+'" placeholder="2027-12-31">';
+      h+='<div class="btns"><button class="btn-save" onclick="saveEdit('+idx+')">Simpan</button><button class="btn-cancel" onclick="hideEditForm('+idx+')">Batal</button></div>';
+      h+='</div>';
+    }
+    h+='</div>';
+  });
+  body.innerHTML=h;
+}
+
+function showAddForm(){document.getElementById('addForm').classList.add('show');}
+function hideAddForm(){document.getElementById('addForm').classList.remove('show');}
+function showEditForm(i){document.getElementById('editForm'+i).classList.add('show');}
+function hideEditForm(i){document.getElementById('editForm'+i).classList.remove('show');}
+
+function copyToClipboard(text){
+  if(navigator.clipboard){navigator.clipboard.writeText(text);}
+  else{var ta=document.createElement('textarea');ta.value=text;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);}
+}
+
+function addUser(){
+  var nm=document.getElementById('addNama').value.trim();
+  var pw=document.getElementById('addPw').value.trim();
+  var rl=document.getElementById('addRole').value;
+  var ex=document.getElementById('addExp').value.trim()||null;
+  if(!nm||!pw){alert('Isi username dan password!');return;}
+  if(nm.length<3){alert('Username minimal 3 karakter!');return;}
+  if(pw.length<5){alert('Password minimal 5 karakter!');return;}
+  if(USERS.find(function(x){return x.nama.toLowerCase()===nm.toLowerCase();})){alert('Username udah ada!');return;}
+  USERS.push({nama:nm,password:pw,role:rl,expired:ex});
+  renderSb();
+  copyToClipboard(JSON.stringify({users:USERS},null,2));
+  alert('✅ User '+nm+' ditambah!\n\n📋 users.json udah dicopy ke clipboard. Paste di GitHub!');
+}
+
+function saveEdit(i){
+  var nm=document.getElementById('editNama'+i).value.trim();
+  var pw=document.getElementById('editPw'+i).value.trim();
+  var rl=document.getElementById('editRole'+i).value;
+  var ex=document.getElementById('editExp'+i).value.trim()||null;
+  if(!nm||!pw){alert('Isi username dan password!');return;}
+  USERS[i].nama=nm;USERS[i].password=pw;USERS[i].role=rl;USERS[i].expired=ex;
+  renderSb();
+  copyToClipboard(JSON.stringify({users:USERS},null,2));
+  alert('✅ User '+nm+' diupdate!\n\n📋 users.json dicopy ke clipboard!');
+}
+
+function delUser(i){
+  if(!confirm('Hapus user '+USERS[i].nama+'?'))return;
+  var nm=USERS[i].nama;
+  USERS.splice(i,1);
+  renderSb();
+  copyToClipboard(JSON.stringify({users:USERS},null,2));
+  alert('🗑️ User '+nm+' dihapus!\n\n📋 users.json dicopy ke clipboard!');
+}
 var KATEGORI=[
 {id:'downloader',strip:'strip-red',ic:'📥',color:'#dc2626',title:'DOWNLOADER',desc:'Download video & audio',char:'📥',items:[
 {n:'TikTok DL',d:'Download video TikTok',i:'🎵',act:'tiktok'},
@@ -299,6 +421,11 @@ var KATEGORI=[
 {n:'FF Stalker',d:'Cek nickname Free Fire',i:'🎯',act:'ff'},
 {n:'ML Stalker',d:'Cek ID Mobile Legends',i:'🎮',act:'ml'},
 {n:'SuperSus',d:'Cek ID SuperSus',i:'👽',act:'supersus'}]},
+{id:'islami',strip:'strip-teal',ic:'🕌',color:'#0d9488',title:'ISLAMI',desc:'Kisah Nabi · Sholat · Quran',char:'🕌',items:[
+{n:'Kisah Nabi',d:'Cerita 25 nabi',i:'📖',act:'kisahnabi'},
+{n:'Jadwal Sholat',d:'Waktu sholat hari ini',i:'🕐',act:'sholat'},
+{n:'Daftar Surat',d:'114 surat Al-Quran',i:'📚',act:'quransurat'},
+{n:'Detail Ayat',d:'Baca ayat Quran',i:'🕋',act:'quranayat'}]},
 {id:'ai',strip:'strip-blue',ic:'🤖',color:'#2563eb',title:'AI TOOLS',desc:'Chat & edit gambar AI',char:'🤖',items:[
 {n:'Gemini AI',d:'Tanya Gemini',i:'✨',act:'gemini'},
 {n:'Cici AI',d:'Chat sama Cici',i:'💬',act:'cici'},
@@ -313,14 +440,15 @@ var KATEGORI=[
 {n:'Password Gen',d:'Bikin password random',i:'🔑',act:'pw'},
 {n:'OTP Gen',d:'Generate OTP',i:'🔢',act:'otp'},
 {n:'Fake Call',d:'Bikin panggilan palsu',i:'📞',act:'fakecall'},
-{n:'Canva Musik',d:'Bikin IP musik',i:'🎵',act:'musicip'}]}
+{n:'Canva Musik',d:'Bikin IP musik',i:'🎵',act:'musicip'},
+{n:'Random Quote',d:'Quote motivasi random',i:'💭',act:'quotes'}]}
 ];
 
 function render(){
   var g=document.getElementById('grid');
   g.innerHTML='';
   var t=0;
-  var list = AKTIF==='all' ? KATEGORI : KATEGORI.filter(function(k){return k.id===AKTIF;});
+  var list=AKTIF==='all'?KATEGORI:KATEGORI.filter(function(k){return k.id===AKTIF;});
   KATEGORI.forEach(function(k){t+=k.items.length;});
   list.forEach(function(k){
     var c='<div class="card" onclick="openKat(\''+k.id+'\')">';
@@ -332,6 +460,7 @@ function render(){
   });
   document.getElementById('totalMod').innerText=t+' MODULES';
 }
+
 function closeModal(){document.getElementById('modalBg').classList.remove('show');}
 document.getElementById('modalBg').addEventListener('click',function(e){if(e.target.id==='modalBg')closeModal();});
 
@@ -368,6 +497,11 @@ function openTool(act,title){
   else if(act==='nanobanana')h='<label '+LBL+'>Link Gambar</label><input id="f1" type="text" placeholder="https://...jpg" '+INP+'><label '+LBL+'>Prompt</label><input id="f2" type="text" placeholder="Hilangkan bintangnya" '+INP+'><button '+BTN+' onclick="runNanoBanana()">Edit</button>';
   else if(act==='animetoreal')h='<label '+LBL+'>Link Gambar Anime</label><input id="f1" type="text" placeholder="https://...jpg" '+INP+'><button '+BTN+' onclick="runAnimeToReal()">Ubah</button>';
   else if(act==='musicip')h='<label '+LBL+'>Link Foto</label><input id="f1" type="text" placeholder="https://...jpg" '+INP+'><label '+LBL+'>Nama</label><input id="f2" type="text" placeholder="Nama kamu" '+INP+'><button '+BTN+' onclick="runMusicIP()">Bikin</button>';
+  else if(act==='quotes')h='<p style="text-align:center;font-size:13px;color:#666;font-weight:600;margin-bottom:10px">Klik tombol buat dapetin quote random</p><button '+BTN+' onclick="runQuotes()">🎲 Random Quote</button>';
+  else if(act==='kisahnabi')h='<label '+LBL+'>Nama Nabi</label><input id="f1" type="text" placeholder="muhammad" '+INP+'><p style="font-size:11px;color:#666;font-weight:600;margin-top:6px">Contoh: muhammad, isa, musa, adam, nuh, ibrahim</p><button '+BTN+' onclick="runKisahNabi()">Cari</button>';
+  else if(act==='sholat')h='<label '+LBL+'>Kota</label><input id="f1" type="text" placeholder="Jakarta" '+INP+'><button '+BTN+' onclick="runSholat()">Lihat Jadwal</button>';
+  else if(act==='quransurat')h='<p style="text-align:center;font-size:13px;color:#666;font-weight:600;margin-bottom:10px">Daftar 114 surat Al-Quran</p><button '+BTN+' onclick="runQuranSurat()">📚 Tampilkan Surat</button>';
+  else if(act==='quranayat')h='<label '+LBL+'>Nomor Surat (1-114)</label><input id="f1" type="text" placeholder="1" '+INP+'><button '+BTN+' onclick="runQuranAyat()">Baca Ayat</button>';
   else if(act==='qr')h='<label '+LBL+'>Text</label><input id="f1" type="text" '+INP+'><label '+LBL+'>Size</label><input id="f2" type="text" value="400" '+INP+'><button '+BTN+' onclick="runQR()">Buat</button>';
   else if(act==='pw')h='<label '+LBL+'>Panjang</label><input id="f1" type="text" value="12" '+INP+'><button '+BTN+' onclick="runPW()">Generate</button>';
   else if(act==='otp')h='<label '+LBL+'>Panjang OTP</label><input id="f1" type="text" value="6" '+INP+'><button '+BTN+' onclick="runOTP()">Generate</button>';
@@ -381,7 +515,11 @@ function setH(html){var h=document.getElementById('hasil');h.innerHTML=html;h.st
 function setL(b){document.getElementById('load').style.display=b?'block':'none';}
 function box(l,v){return '<div class="box"><div class="l">'+l+'</div><div class="v">'+v+'</div></div>';}
 function api(u){return 'https://hyerls.my.id/api/'+u+'?key='+API_KEY;}
-
+async function runQuotes(){setL(true);try{var r=await fetch(api('quotes.php'));var j=await r.json();setL(false);if(j.success){var h='<div style="padding:16px;background:#fff;border:3px solid #1a1a1a;border-radius:12px;box-shadow:4px 4px 0 #1a1a1a"><div style="font-size:32px;text-align:center;margin-bottom:8px">💭</div><div style="font-size:14px;font-weight:700;line-height:1.6;font-style:italic">"'+j.quote+'"</div><div style="margin-top:12px;font-size:12px;font-weight:800;color:#666;text-align:right">— '+j.author+'</div></div><button '+BTN+' onclick="runQuotes()">🔄 Quote Lagi</button>';setH(h);}else setH('<b>❌ Gagal</b>');}catch(e){setL(false);setH('<b>❌ '+e.message+'</b>');}}
+async function runKisahNabi(){var nabi=document.getElementById('f1').value.trim().toLowerCase();if(!nabi)return alert('Isi!');setL(true);try{var r=await fetch(api('kisahnabi.php')+'&nabi='+encodeURIComponent(nabi));var raw=await r.text();setL(false);var j;try{j=JSON.parse(raw);}catch(e){}if(j&&j.success){var h='<b>📖 '+(j.nabi||nabi)+'</b>';if(j.tahun_kelahiran)h+=box('Tahun Kelahiran',j.tahun_kelahiran);if(j.tempat)h+=box('Tempat',j.tempat);if(j.umur)h+=box('Umur',j.umur);if(j.deskripsi)h+='<div style="margin-top:10px;line-height:1.7;font-size:13px">'+j.deskripsi+'</div>';if(j.kisah)h+='<div style="margin-top:10px;line-height:1.7;font-size:13px">'+j.kisah+'</div>';if(!j.kisah&&!j.deskripsi)h+='<pre style="font-size:10px;white-space:pre-wrap">'+raw+'</pre>';setH(h);}else setH('<b>❌ Nabi gak ditemukan</b><pre style="font-size:10px;white-space:pre-wrap">'+raw+'</pre>');}catch(e){setL(false);setH('<b>❌ '+e.message+'</b>');}}
+async function runSholat(){var kota=document.getElementById('f1').value.trim();if(!kota)return alert('Isi!');setL(true);try{var r=await fetch(api('jadwalshalat.php')+'&kota='+encodeURIComponent(kota));var j=await r.json();setL(false);if(j.success){var d=j.data;var h='<b>🕌 '+d.lokasi+'</b>';h+='<div style="font-size:11px;color:#666;font-weight:700;margin-bottom:10px">'+d.tanggal_masehi+' · '+d.tanggal_hijriyah+'</div>';var jdw=d.jadwal;var list=[['Imsak',jdw.Imsak],['Subuh',jdw.Fajr],['Terbit',jdw.Sunrise],['Dzuhur',jdw.Dhuhr],['Ashar',jdw.Asr],['Maghrib',jdw.Maghrib],['Isya',jdw.Isha]];list.forEach(function(x){h+='<div style="display:flex;justify-content:space-between;padding:8px 10px;background:#fff;border:2px solid #1a1a1a;border-radius:8px;margin:6px 0;font-weight:700"><span>'+x[0]+'</span><span style="color:#16a34a">'+x[1]+'</span></div>';});setH(h);}else setH('<b>❌ Kota gak ditemukan</b>');}catch(e){setL(false);setH('<b>❌ '+e.message+'</b>');}}
+async function runQuranSurat(){setL(true);try{var r=await fetch(api('quransurat.php'));var raw=await r.text();setL(false);var j;try{j=JSON.parse(raw);}catch(e){}if(j&&j.success){var list=j.data||j.surat||j.result||[];var h='<b>📚 Daftar Surat</b>';list.forEach(function(s){var no=s.nomor||s.number||s.id||'';var nm=s.nama||s.name||s.latin||'';var ar2=s.arti||s.meaning||'';var ayt=s.ayat||s.verses||s.count||'';h+='<div style="padding:10px;background:#fff;border:2px solid #1a1a1a;border-radius:8px;margin:6px 0;font-weight:700"><span style="display:inline-block;width:30px">'+no+'.</span>'+nm+' <span style="font-size:11px;color:#666">('+ayt+' ayat)</span><div style="font-size:11px;color:#666;margin-top:2px">'+ar2+'</div></div>';});setH(h);}else setH('<b>❌ Gagal</b><pre style="font-size:10px;white-space:pre-wrap">'+raw.slice(0,300)+'</pre>');}catch(e){setL(false);setH('<b>❌ '+e.message+'</b>');}}
+async function runQuranAyat(){var id=document.getElementById('f1').value.trim();if(!id)return alert('Isi!');setL(true);try{var r=await fetch(api('quranayat.php')+'&id='+id);var raw=await r.text();setL(false);var j;try{j=JSON.parse(raw);}catch(e){}if(j&&j.success){var list=j.data||j.ayat||j.result||[];var h='<b>🕋 Surat '+id+'</b>';list.forEach(function(a){var no=a.nomor||a.number||a.id||'';var ar=a.ar||a.arab||a.arabic||'';var lt=a.tr||a.latin||a.translation||'';h+='<div style="padding:12px;background:#fff;border:2px solid #1a1a1a;border-radius:8px;margin:8px 0"><div style="font-size:11px;color:#16a34a;font-weight:800;margin-bottom:6px">Ayat '+no+'</div>';if(ar)h+='<div style="font-size:18px;text-align:right;line-height:1.8;margin-bottom:8px">'+ar+'</div>';if(lt)h+='<div style="font-size:12px;color:#333;line-height:1.6;font-style:italic">'+lt+'</div>';h+='</div>';});setH(h);}else setH('<b>❌ Gagal</b><pre style="font-size:10px;white-space:pre-wrap">'+raw.slice(0,300)+'</pre>');}catch(e){setL(false);setH('<b>❌ '+e.message+'</b>');}}
 function runFC(){var a=document.getElementById('f1').value.trim(),b=document.getElementById('f2').value.trim(),c=document.getElementById('f3').value.trim();if(!a||!b||!c)return alert('Isi semua!');setH('<b>✅ Berhasil!</b><img src="'+api('fakecall.php')+'&imgUrl='+encodeURIComponent(a)+'&name='+encodeURIComponent(b)+'&durasi='+encodeURIComponent(c)+'">');}
 function runSSW(){var u=document.getElementById('f1').value.trim();if(!u)return alert('Isi!');var x=api('screenshot.php')+'&url='+encodeURIComponent(u);setH('<b>✅ Screenshot</b><img src="'+x+'"><a class="dl" href="'+x+'" target="_blank">🔗 Buka di Tab Baru</a>');}
 async function runDOM(){var d=document.getElementById('f1').value.trim();if(!d)return alert('Isi!');setL(true);try{var r=await fetch(api('wdomain.php')+'&domain='+encodeURIComponent(d));var j=await r.json();setL(false);if(j.success){var x=j.data||j;var h='<b>✅ Detail Domain</b>';Object.keys(x).forEach(function(k){if(typeof x[k]==='string'||typeof x[k]==='number')h+=box(k,x[k]);});setH(h);}else setH('<b>❌ Gagal</b>');}catch(e){setL(false);setH('<b>❌ '+e.message+'</b>');}}
