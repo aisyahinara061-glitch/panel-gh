@@ -1,6 +1,16 @@
 {
   "users": [
-    { "nama": "azka", "password": "12345", "role": "developer", "expired": null },
-    { "nama": "ghany", "password": "12345", "role": "Reseller", "expired": "2026-9-18" }
+    {
+      "nama": "azka",
+      "password": "12345",
+      "role": "developer",
+      "expired": null
+    },
+    {
+      "nama": "ghany",
+      "password": "12345",
+      "role": "user",
+      "expired": "2026-9-30"
+    }
   ]
 }
