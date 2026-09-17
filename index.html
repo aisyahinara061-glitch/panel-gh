@@ -153,7 +153,7 @@ body{background:#fdf6e3;background-image:radial-gradient(#e8d9b0 1px,transparent
 </div>
 
 <script>
- var API_KEY='PREMIUM03DYWHDHWHFHAJXSJFHAJS';
+  var API_KEY='PREMIUM03DYWHDHWHFHAJXSJFHAJS';
 var USERS=[];
 var AKTIF='all';
 
@@ -215,15 +215,12 @@ function renderDashboard(u){
   var role=u.role||'user';
   var hariIni=new Date();
   var tgl=hariIni.toLocaleDateString('id-ID',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
-  
   document.getElementById('dashAvatar').innerText=u.nama.charAt(0).toUpperCase();
   document.getElementById('dashName').innerText=u.nama;
   document.getElementById('dashRole').innerText=(role==='admin'?'👑 Admin':'👤 Member');
   document.getElementById('dashToday').innerText=tgl;
-  
   var warn=document.getElementById('dashWarn');
   warn.style.display='none';
-  
   if(role==='admin'){
     document.getElementById('dashExp').innerText='∞ Permanen';
     document.getElementById('dashExp').style.color='#16a34a';
@@ -236,7 +233,6 @@ function renderDashboard(u){
       var expDate=new Date(expired);
       var sisaHari=Math.ceil((expDate-hariIni)/(1000*60*60*24));
       document.getElementById('dashExp').innerText=expDate.toLocaleDateString('id-ID',{day:'numeric',month:'short',year:'numeric'});
-      
       if(sisaHari<0){
         document.getElementById('dashExp').style.color='#991b1b';
         warn.style.display='block';
@@ -266,25 +262,31 @@ function filterKat(id,el){
 }
 
 var KATEGORI=[
-{id:'downloader',strip:'strip-red',ic:'📥',color:'#dc2626',title:'DOWNLOADER',desc:'Download video & gambar',char:'📥',items:[
+{id:'downloader',strip:'strip-red',ic:'📥',color:'#dc2626',title:'DOWNLOADER',desc:'Download video & audio',char:'📥',items:[
 {n:'TikTok DL',d:'Download video TikTok',i:'🎵',act:'tiktok'},
-{n:'Pinterest',d:'Cari gambar Pinterest',i:'📌',act:'pinterest'}]},
+{n:'Pinterest',d:'Cari gambar Pinterest',i:'📌',act:'pinterest'},
+{n:'Pinterest DL',d:'Download gambar Pinterest',i:'📌',act:'pintv1'},
+{n:'Spotify DL',d:'Download lagu Spotify',i:'🎧',act:'spotify'},
+{n:'Terabox DL',d:'Download file Terabox',i:'☁️',act:'terabox'}]},
 {id:'stalker',strip:'strip-green',ic:'🕵️',color:'#16a34a',title:'STALKER',desc:'Cek ID game',char:'🕵️',items:[
 {n:'FF Stalker',d:'Cek nickname Free Fire',i:'🎯',act:'ff'},
 {n:'ML Stalker',d:'Cek ID Mobile Legends',i:'🎮',act:'ml'},
 {n:'SuperSus',d:'Cek ID SuperSus',i:'👽',act:'supersus'}]},
-{id:'ai',strip:'strip-blue',ic:'🤖',color:'#2563eb',title:'AI TOOLS',desc:'Chat dengan AI',char:'🤖',items:[
+{id:'ai',strip:'strip-blue',ic:'🤖',color:'#2563eb',title:'AI TOOLS',desc:'Chat & edit gambar AI',char:'🤖',items:[
 {n:'Gemini AI',d:'Tanya Gemini',i:'✨',act:'gemini'},
 {n:'Cici AI',d:'Chat sama Cici',i:'💬',act:'cici'},
 {n:'Apertus AI',d:'AI pintar',i:'🧠',act:'apertus'},
-{n:'Unlimited AI',d:'AI tanpa batas',i:'∞',act:'unliai'}]},
+{n:'Unlimited AI',d:'AI tanpa batas',i:'∞',act:'unliai'},
+{n:'Image Editor',d:'Edit gambar pake AI',i:'🖼️',act:'nanobanana'},
+{n:'Anime to Real',d:'Ubah anime jadi real',i:'🎨',act:'animetoreal'}]},
 {id:'utility',strip:'strip-yellow',ic:'🧰',color:'#fbbf24',title:'UTILITY',desc:'Tools berguna',char:'🧰',items:[
 {n:'SS Web',d:'Screenshot website',i:'📸',act:'ssweb'},
 {n:'Cek Domain',d:'Detail domain',i:'🌐',act:'domain'},
 {n:'QR Code',d:'Text jadi QR',i:'🔳',act:'qr'},
 {n:'Password Gen',d:'Bikin password random',i:'🔑',act:'pw'},
 {n:'OTP Gen',d:'Generate OTP',i:'🔢',act:'otp'},
-{n:'Fake Call',d:'Bikin panggilan palsu',i:'📞',act:'fakecall'}]}
+{n:'Fake Call',d:'Bikin panggilan palsu',i:'📞',act:'fakecall'},
+{n:'Canva Musik',d:'Bikin IP musik',i:'🎵',act:'musicip'}]}
 ];
 
 function render(){
@@ -302,7 +304,7 @@ function render(){
     g.innerHTML+=c;
   });
   document.getElementById('totalMod').innerText=t+' MODULES';
-}
+          }
   function closeModal(){document.getElementById('modalBg').classList.remove('show');}
 document.getElementById('modalBg').addEventListener('click',function(e){if(e.target.id==='modalBg')closeModal();});
 
@@ -333,6 +335,12 @@ function openTool(act,title){
   else if(act==='supersus')h='<label '+LBL+'>Space ID</label><input id="f1" type="text" '+INP+'><button '+BTN+' onclick="runSS()">Cek</button>';
   else if(act==='tiktok')h='<label '+LBL+'>Link TikTok</label><input id="f1" type="text" '+INP+'><button '+BTN+' onclick="runTT()">Download</button>';
   else if(act==='pinterest')h='<label '+LBL+'>Kata kunci</label><input id="f1" type="text" placeholder="kucing lucu" '+INP+'><button '+BTN+' onclick="runPIN()">Cari</button>';
+  else if(act==='pintv1')h='<label '+LBL+'>Link Pinterest</label><input id="f1" type="text" placeholder="https://pin.it/..." '+INP+'><button '+BTN+' onclick="runPintV1()">Download</button>';
+  else if(act==='spotify')h='<label '+LBL+'>Link Spotify</label><input id="f1" type="text" placeholder="https://open.spotify.com/track/..." '+INP+'><button '+BTN+' onclick="runSpotify()">Download</button>';
+  else if(act==='terabox')h='<label '+LBL+'>Link Terabox</label><input id="f1" type="text" placeholder="https://1024tera.com/..." '+INP+'><button '+BTN+' onclick="runTerabox()">Download</button>';
+  else if(act==='nanobanana')h='<label '+LBL+'>Link Gambar</label><input id="f1" type="text" placeholder="https://...jpg" '+INP+'><label '+LBL+'>Prompt</label><input id="f2" type="text" placeholder="Hilangkan bintangnya" '+INP+'><button '+BTN+' onclick="runNanoBanana()">Edit</button>';
+  else if(act==='animetoreal')h='<label '+LBL+'>Link Gambar Anime</label><input id="f1" type="text" placeholder="https://...jpg" '+INP+'><button '+BTN+' onclick="runAnimeToReal()">Ubah</button>';
+  else if(act==='musicip')h='<label '+LBL+'>Link Foto</label><input id="f1" type="text" placeholder="https://...jpg" '+INP+'><label '+LBL+'>Nama</label><input id="f2" type="text" placeholder="Nama kamu" '+INP+'><button '+BTN+' onclick="runMusicIP()">Bikin</button>';
   else if(act==='qr')h='<label '+LBL+'>Text</label><input id="f1" type="text" '+INP+'><label '+LBL+'>Size</label><input id="f2" type="text" value="400" '+INP+'><button '+BTN+' onclick="runQR()">Buat</button>';
   else if(act==='pw')h='<label '+LBL+'>Panjang</label><input id="f1" type="text" value="12" '+INP+'><button '+BTN+' onclick="runPW()">Generate</button>';
   else if(act==='otp')h='<label '+LBL+'>Panjang OTP</label><input id="f1" type="text" value="6" '+INP+'><button '+BTN+' onclick="runOTP()">Generate</button>';
@@ -348,14 +356,20 @@ function box(l,v){return '<div class="box"><div class="l">'+l+'</div><div class=
 function api(u){return 'https://hyerls.my.id/api/'+u+'?key='+API_KEY;}
 
 function runFC(){var a=document.getElementById('f1').value.trim(),b=document.getElementById('f2').value.trim(),c=document.getElementById('f3').value.trim();if(!a||!b||!c)return alert('Isi semua!');setH('<b>✅ Berhasil!</b><img src="'+api('fakecall.php')+'&imgUrl='+encodeURIComponent(a)+'&name='+encodeURIComponent(b)+'&durasi='+encodeURIComponent(c)+'">');}
-function runSSW(){var u=document.getElementById('f1').value.trim();if(!u)return alert('Isi!');setH('<b>✅ Screenshot</b><img src="'+api('screenshot.php')+'&url='+encodeURIComponent(u)+'">');}
+function runSSW(){var u=document.getElementById('f1').value.trim();if(!u)return alert('Isi!');var x=api('screenshot.php')+'&url='+encodeURIComponent(u);setH('<b>✅ Screenshot</b><img src="'+x+'"><a class="dl" href="'+x+'" target="_blank">🔗 Buka di Tab Baru</a>');}
 async function runDOM(){var d=document.getElementById('f1').value.trim();if(!d)return alert('Isi!');setL(true);try{var r=await fetch(api('wdomain.php')+'&domain='+encodeURIComponent(d));var j=await r.json();setL(false);if(j.success){var x=j.data||j;var h='<b>✅ Detail Domain</b>';Object.keys(x).forEach(function(k){if(typeof x[k]==='string'||typeof x[k]==='number')h+=box(k,x[k]);});setH(h);}else setH('<b>❌ Gagal</b>');}catch(e){setL(false);setH('<b>❌ '+e.message+'</b>');}}
 async function runFF(){var id=document.getElementById('f1').value.trim();if(!id)return alert('Isi!');setL(true);try{var r=await fetch(api('cekidff.php')+'&id='+id);var j=await r.json();setL(false);if(j.success){var x=j.data;setH('<b>✅ Ditemukan!</b>'+box('ID',x.id)+box('Nickname',x.nickname||'-'));}else setH('<b>❌ Gagal</b>');}catch(e){setL(false);setH('<b>❌ '+e.message+'</b>');}}
 async function runML(){var id=document.getElementById('f1').value.trim(),sv=document.getElementById('f2').value.trim();if(!id||!sv)return alert('Isi!');setL(true);try{var r=await fetch(api('cekml.php')+'&id='+id+'&server='+sv);var j=await r.json();setL(false);if(j.success){var x=j.data;setH('<b>✅ Ditemukan!</b>'+box('ID',x.id)+box('Server',x.server)+box('Nickname',x.nickname||'-'));}else setH('<b>❌ Gagal</b>');}catch(e){setL(false);setH('<b>❌ '+e.message+'</b>');}}
 async function runSS(){var id=document.getElementById('f1').value.trim();if(!id)return alert('Isi!');setL(true);try{var r=await fetch(api('supersus.php')+'&id='+id);var raw=await r.text();setL(false);var j;try{j=JSON.parse(raw);}catch(e){}if(j&&j.success){var x=j.data||j;var h='<b>✅ Ditemukan!</b>';if(x.nickname)h+=box('Nickname',x.nickname);if(x.id)h+=box('ID',x.id);setH(h);}else setH('<b>❌ Gagal</b><pre style="font-size:10px;white-space:pre-wrap">'+raw+'</pre>');}catch(e){setL(false);setH('<b>❌ '+e.message+'</b>');}}
 async function runTT(){var url=document.getElementById('f1').value.trim();if(!url)return alert('Isi!');setL(true);try{var r=await fetch(api('tiktok.php')+'&url='+encodeURIComponent(url));var raw=await r.text();setL(false);var j;try{j=JSON.parse(raw);}catch(e){}if(j&&j.success){var x=j.data||j;var vid=x.video_url||x.download_url||x.url||x.play;var h='<b>✅ Berhasil!</b>';if(x.cover)h+='<img src="'+x.cover+'">';if(vid)h+='<a class="dl" href="'+vid+'" target="_blank">📥 Download Video</a>';setH(h);}else setH('<b>❌ Gagal</b><pre style="font-size:10px;white-space:pre-wrap">'+raw+'</pre>');}catch(e){setL(false);setH('<b>❌ '+e.message+'</b>');}}
 async function runPIN(){var q=document.getElementById('f1').value.trim();if(!q)return alert('Isi!');setL(true);try{var r=await fetch(api('pint.php')+'&query='+encodeURIComponent(q));var j=await r.json();setL(false);if(j.success&&j.results){var h='<b>✅ '+j.count+' hasil</b><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px">';j.results.slice(0,6).forEach(function(it){if(it.image_url)h+='<img src="'+it.image_url+'" style="width:100%;border-radius:6px">';});h+='</div>';setH(h);}else setH('<b>❌ Gak ada</b>');}catch(e){setL(false);setH('<b>❌ '+e.message+'</b>');}}
-function runQR(){var t=document.getElementById('f1').value.trim(),s=document.getElementById('f2').value.trim()||'400';if(!t)return alert('Isi!');setH('<b>✅ QR Code</b><img src="'+api('tqr.php')+'&text='+encodeURIComponent(t)+'&size='+s+'">');}
+async function runPintV1(){var u=document.getElementById('f1').value.trim();if(!u)return alert('Isi!');setL(true);try{var r=await fetch(api('pintv1.php')+'&url='+encodeURIComponent(u));var raw=await r.text();setL(false);var j;try{j=JSON.parse(raw);}catch(e){}if(j&&j.success){var h='<b>✅ Berhasil!</b>';if(j.image_url)h+='<img src="'+j.image_url+'">';if(j.video_url)h+='<a class="dl" href="'+j.video_url+'" target="_blank">📥 Download Video</a>';if(j.download_url)h+='<a class="dl" href="'+j.download_url+'" target="_blank">📥 Download</a>';if(!j.image_url&&!j.video_url&&!j.download_url)h+='<pre style="font-size:10px;white-space:pre-wrap">'+raw+'</pre>';setH(h);}else setH('<b>❌ Gagal</b><pre style="font-size:10px;white-space:pre-wrap">'+raw+'</pre>');}catch(e){setL(false);setH('<b>❌ '+e.message+'</b>');}}
+async function runSpotify(){var u=document.getElementById('f1').value.trim();if(!u)return alert('Isi!');setL(true);try{var r=await fetch(api('spotify.php')+'&url='+encodeURIComponent(u));var j=await r.json();setL(false);if(j.success){var h='<b>✅ '+(j.title||'Berhasil')+'</b>';if(j.artist)h+=box('Artis',j.artist);if(j.duration)h+=box('Durasi',j.duration);if(j.thumbnail)h+='<img src="'+j.thumbnail+'">';if(j.download_url)h+='<a class="dl" href="'+j.download_url+'" target="_blank">🎧 Download Lagu</a>';if(j.url)h+='<a class="dl" href="'+j.url+'" target="_blank">🎧 Download</a>';setH(h);}else setH('<b>❌ Gagal</b><pre style="font-size:10px;white-space:pre-wrap">'+JSON.stringify(j)+'</pre>');}catch(e){setL(false);setH('<b>❌ '+e.message+'</b>');}}
+async function runTerabox(){var u=document.getElementById('f1').value.trim();if(!u)return alert('Isi!');setL(true);try{var r=await fetch(api('terabox.php')+'&url='+encodeURIComponent(u));var raw=await r.text();setL(false);var j;try{j=JSON.parse(raw);}catch(e){}if(j&&j.success){var h='<b>✅ Berhasil!</b>';if(j.file_name)h+=box('Nama',j.file_name);if(j.size)h+=box('Ukuran',j.size);if(j.download_url)h+='<a class="dl" href="'+j.download_url+'" target="_blank">📥 Download</a>';if(j.url)h+='<a class="dl" href="'+j.url+'" target="_blank">📥 Download</a>';if(!j.download_url&&!j.url)h+='<pre style="font-size:10px;white-space:pre-wrap">'+raw+'</pre>';setH(h);}else setH('<b>❌ Gagal</b><pre style="font-size:10px;white-space:pre-wrap">'+raw+'</pre>');}catch(e){setL(false);setH('<b>❌ '+e.message+'</b>');}}
+async function runNanoBanana(){var img=document.getElementById('f1').value.trim(),pr=document.getElementById('f2').value.trim();if(!img||!pr)return alert('Isi semua!');setL(true);try{var r=await fetch(api('nanobanana.php')+'&image='+encodeURIComponent(img)+'&prompt='+encodeURIComponent(pr));var raw=await r.text();setL(false);var j;try{j=JSON.parse(raw);}catch(e){}if(j&&j.success){var h='<b>✅ Berhasil!</b>';var x=j.image_url||j.result||j.url||j.output;if(x)h+='<img src="'+x+'">';if(x)h+='<a class="dl" href="'+x+'" target="_blank">📥 Download</a>';if(!x)h+='<pre style="font-size:10px;white-space:pre-wrap">'+raw+'</pre>';setH(h);}else setH('<b>❌ Gagal</b><pre style="font-size:10px;white-space:pre-wrap">'+raw+'</pre>');}catch(e){setL(false);setH('<b>❌ '+e.message+'</b>');}}
+async function runAnimeToReal(){var u=document.getElementById('f1').value.trim();if(!u)return alert('Isi!');setL(true);try{var r=await fetch(api('animetoreal.php')+'&url='+encodeURIComponent(u));var raw=await r.text();setL(false);var j;try{j=JSON.parse(raw);}catch(e){}if(j&&j.success){var h='<b>✅ Berhasil!</b>';var x=j.image_url||j.result||j.url||j.output;if(x)h+='<img src="'+x+'">';if(x)h+='<a class="dl" href="'+x+'" target="_blank">📥 Download</a>';if(!x)h+='<pre style="font-size:10px;white-space:pre-wrap">'+raw+'</pre>';setH(h);}else setH('<b>❌ Gagal</b><pre style="font-size:10px;white-space:pre-wrap">'+raw+'</pre>');}catch(e){setL(false);setH('<b>❌ '+e.message+'</b>');}}
+async function runMusicIP(){var img=document.getElementById('f1').value.trim(),nm=document.getElementById('f2').value.trim();if(!img||!nm)return alert('Isi semua!');setL(true);try{var r=await fetch(api('musicip.php')+'&imgUrl='+encodeURIComponent(img)+'&name='+encodeURIComponent(nm));var raw=await r.text();setL(false);var j;try{j=JSON.parse(raw);}catch(e){}if(j&&j.success){var h='<b>✅ Berhasil!</b>';var x=j.image_url||j.result||j.url||j.output;if(x)h+='<img src="'+x+'">';if(x)h+='<a class="dl" href="'+x+'" target="_blank">📥 Download</a>';if(!x)h+='<pre style="font-size:10px;white-space:pre-wrap">'+raw+'</pre>';setH(h);}else setH('<b>❌ Gagal</b><pre style="font-size:10px;white-space:pre-wrap">'+raw+'</pre>');}catch(e){setL(false);setH('<b>❌ '+e.message+'</b>');}}
+function runQR(){var t=document.getElementById('f1').value.trim(),s=document.getElementById('f2').value.trim()||'400';if(!t)return alert('Isi!');var x=api('tqr.php')+'&text='+encodeURIComponent(t)+'&size='+s;setH('<b>✅ QR Code</b><img src="'+x+'"><a class="dl" href="'+x+'" target="_blank">🔗 Buka di Tab Baru</a>');}
 async function runPW(){var l=document.getElementById('f1').value.trim()||'12';setL(true);try{var r=await fetch(api('generate_password.php')+'&length='+l);var j=await r.json();setL(false);if(j.success){var x=j.data||j;var pw=x.password||x.result||x.pw||'';setH('<b>✅ Password</b>'+box('Hasil',pw||JSON.stringify(x)));}else setH('<b>❌ Gagal</b>');}catch(e){setL(false);setH('<b>❌ '+e.message+'</b>');}}
 async function runOTP(){var l=document.getElementById('f1').value.trim()||'6';setL(true);try{var r=await fetch(api('otp.php')+'&length='+l);var j=await r.json();setL(false);if(j.success){var x=j.data||j;var o=x.otp||x.code||x.result||'';setH('<b>✅ OTP</b>'+box('Kode',o||JSON.stringify(x)));}else setH('<b>❌ Gagal</b>');}catch(e){setL(false);setH('<b>❌ '+e.message+'</b>');}}
 async function runAI(m){var p=document.getElementById('f1').value.trim();if(!p)return alert('Isi!');setL(true);var map={gemini:'gemini.php?text=',cici:'cici.php?prompt=',apertus:'apertus.php?q=',unliai:'unliai.php?teks='};var url=api(map[m].split('?')[0])+'&'+map[m].split('?')[1]+encodeURIComponent(p);try{var r=await fetch(url);var raw=await r.text();setL(false);var ans=raw;try{var j=JSON.parse(raw);ans=j.result||j.response||j.answer||j.message||j.text||j.data||JSON.stringify(j);}catch(e){}setH('<b>🤖 '+m.toUpperCase()+'</b><div style="margin-top:8px">'+ans+'</div>');}catch(e){setL(false);setH('<b>❌ '+e.message+'</b>');}}
