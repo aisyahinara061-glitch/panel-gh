@@ -4,181 +4,271 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Azka Panel</title>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:sans-serif}
-body{background:#fdf6e3;color:#1a1a1a;min-height:100vh;padding:20px}
-.card{max-width:400px;margin:30px auto;background:#fff;border:3px solid #1a1a1a;border-radius:20px;padding:25px;box-shadow:6px 6px 0 #1a1a1a;text-align:center}
-h1{font-size:22px;margin-bottom:8px}
-p{font-size:12px;color:#666;margin-bottom:15px}
-label{display:block;text-align:left;font-size:12px;font-weight:700;margin:8px 0 4px}
-input{width:100%;padding:12px;border:3px solid #1a1a1a;border-radius:10px;background:#fdf6e3;font-size:14px;outline:none}
-button.auth{width:100%;padding:14px;background:#8b5cf6;color:#fff;border:3px solid #1a1a1a;border-radius:10px;font-size:15px;font-weight:800;cursor:pointer;box-shadow:4px 4px 0 #1a1a1a;margin-top:15px}
-button.auth:disabled{opacity:0.6}
-.msg{margin-top:12px;font-size:13px;font-weight:700;padding:8px;border-radius:8px;min-height:20px}
-.msg.err{color:#dc2626;background:#fee2e2}
-.msg.ok{color:#16a34a;background:#dcfce7}
-#appScreen{display:none}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:15px}
-.tool{border:3px solid #1a1a1a;border-radius:15px;padding:15px;box-shadow:4px 4px 0 #1a1a1a;cursor:pointer;text-align:center;font-weight:800;font-size:13px}
-.tool .ico{font-size:28px;display:block;margin-bottom:6px}
-.logout{width:100%;padding:14px;background:#dc2626;color:#fff;border:3px solid #1a1a1a;border-radius:10px;font-size:15px;font-weight:800;cursor:pointer;box-shadow:4px 4px 0 #1a1a1a}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Plus Jakarta Sans',sans-serif;-webkit-tap-highlight-color:transparent}
+body{background:#fdf6e3;background-image:radial-gradient(#e8d9b0 1px,transparent 1px);background-size:18px 18px;color:#1a1a1a;min-height:100vh}
+#loginScreen{display:flex;align-items:center;justify-content:center;min-height:100vh;padding:20px}
+.lcard{background:#fff;border:4px solid #1a1a1a;border-radius:24px;padding:30px 24px;box-shadow:8px 8px 0 #1a1a1a;width:100%;max-width:400px;text-align:center}
+.llogo{width:80px;height:80px;margin:0 auto 16px;background:#dc2626;border:4px solid #1a1a1a;border-radius:22px;display:flex;align-items:center;justify-content:center;font-size:38px;box-shadow:5px 5px 0 #1a1a1a}
+.lcard h1{font-family:'Archivo Black',sans-serif;font-size:24px;margin-bottom:6px}
+.lcard p{font-size:12px;color:#666;margin-bottom:22px;font-weight:600}
+.lcard label{display:block;text-align:left;font-size:12px;font-weight:800;margin:10px 0 6px;text-transform:uppercase}
+.lcard input{width:100%;padding:14px;border:3px solid #1a1a1a;border-radius:12px;background:#fdf6e3;font-size:14px;outline:none;font-family:inherit;font-weight:600}
+.lcard button{width:100%;padding:15px;background:#dc2626;color:#fff;border:3px solid #1a1a1a;border-radius:12px;font-size:15px;font-weight:800;cursor:pointer;box-shadow:4px 4px 0 #1a1a1a;margin-top:18px;text-transform:uppercase;font-family:inherit}
+.lcard button:active{transform:translate(2px,2px);box-shadow:2px 2px 0 #1a1a1a}
+.lcard button:disabled{opacity:.6}
+.lmsg{margin-top:14px;font-size:13px;font-weight:700;padding:10px;border-radius:10px}
+.lmsg.err{color:#991b1b;background:#fee2e2;border:2px solid #991b1b}
+.lmsg.ok{color:#166534;background:#dcfce7;border:2px solid #166534}
+#appScreen{display:none;padding-bottom:120px}
+.header{background:#dc2626;border-bottom:4px solid #1a1a1a;padding:16px 18px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:50;box-shadow:0 4px 0 #1a1a1a}
+.header .menu-btn{width:42px;height:42px;background:#fff;border:3px solid #1a1a1a;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;box-shadow:3px 3px 0 #1a1a1a;font-weight:900}
+.header .title{flex:1;text-align:center;font-family:'Archivo Black',sans-serif;font-size:20px;color:#fff;letter-spacing:1px;text-shadow:2px 2px 0 #1a1a1a}
+.header .icons{display:flex;gap:8px}
+.header .icons .ico{width:42px;height:42px;background:#fff;border:3px solid #1a1a1a;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:18px;box-shadow:3px 3px 0 #1a1a1a;cursor:pointer}
+.container{padding:20px 18px;max-width:520px;margin:0 auto}
+.sec-head{margin-bottom:14px}
+.sec-head .top{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+.sec-head h1{font-family:'Archivo Black',sans-serif;font-size:22px;text-transform:uppercase;text-decoration:underline;text-decoration-thickness:3px;text-underline-offset:6px}
+.sec-head .badge{background:#fbbf24;border:3px solid #1a1a1a;border-radius:10px;padding:6px 12px;font-weight:800;font-size:11px;box-shadow:3px 3px 0 #1a1a1a}
+.sec-head p{font-size:12px;color:#555;margin-top:6px;font-weight:600}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.card{background:#fff;border:3px solid #1a1a1a;border-radius:18px;padding:16px 14px;box-shadow:5px 5px 0 #1a1a1a;cursor:pointer;position:relative;overflow:hidden;min-height:160px;display:flex;flex-direction:column}
+.card:active{transform:translate(2px,2px);box-shadow:3px 3px 0 #1a1a1a}
+.card .top-strip{position:absolute;top:0;left:0;width:100%;height:8px}
+.card .ic-wrap{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:26px;border:3px solid #1a1a1a;box-shadow:3px 3px 0 #1a1a1a;margin:12px 0 14px}
+.card h3{font-family:'Archivo Black',sans-serif;font-size:15px;text-transform:uppercase;margin-bottom:4px;line-height:1.2}
+.card p{font-size:11px;color:#555;font-weight:600;line-height:1.4}
+.card .char{position:absolute;top:8px;right:8px;font-size:34px;transform:rotate(-10deg)}
+.strip-red{background:#dc2626}.strip-green{background:#16a34a}.strip-blue{background:#2563eb}.strip-yellow{background:#fbbf24}
+.bottom-nav{position:fixed;bottom:0;left:0;right:0;background:#fdf6e3;border-top:4px solid #1a1a1a;display:flex;padding:10px 8px 14px;z-index:100;justify-content:space-around;align-items:flex-end}
+.nav-item{flex:1;text-align:center;font-size:10px;font-weight:800;cursor:pointer;color:#1a1a1a;padding:6px 2px}
+.nav-item .ico{display:flex;align-items:center;justify-content:center;width:48px;height:48px;background:#fff;border:3px solid #1a1a1a;border-radius:12px;font-size:20px;margin:0 auto 6px;box-shadow:3px 3px 0 #1a1a1a}
+.nav-item.active .ico{background:#fbbf24}
+.modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:999;padding:20px;overflow-y:auto}
+.modal-bg.show{display:block}
+.modal{background:#fff;border:4px solid #1a1a1a;border-radius:22px;padding:20px;max-width:440px;margin:40px auto;box-shadow:8px 8px 0 #1a1a1a}
+.modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;padding-bottom:12px;border-bottom:3px solid #1a1a1a}
+.modal-head h2{font-family:'Archivo Black',sans-serif;font-size:15px;text-transform:uppercase}
+.modal-close{width:36px;height:36px;background:#fecaca;border:3px solid #1a1a1a;border-radius:10px;font-weight:900;cursor:pointer;box-shadow:3px 3px 0 #1a1a1a;font-size:16px}
+.modal-list{display:flex;flex-direction:column;gap:10px}
+.mitem{display:flex;align-items:center;gap:12px;background:#fdf6e3;border:3px solid #1a1a1a;border-radius:14px;padding:12px 14px;cursor:pointer;box-shadow:3px 3px 0 #1a1a1a}
+.mitem:active{transform:translate(2px,2px);box-shadow:1px 1px 0 #1a1a1a}
+.mitem .mi{width:38px;height:38px;background:#fff;border:2px solid #1a1a1a;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.mitem .mt{flex:1}
+.mitem .mt b{font-size:13px;font-weight:800;display:block}
+.mitem .mt span{font-size:10px;color:#666;font-weight:600}
+.mitem .ar{font-size:16px;font-weight:900}
+.modal label{display:block;font-size:12px;font-weight:800;margin:12px 0 6px;text-transform:uppercase}
+.modal input,.modal textarea{width:100%;padding:12px;background:#fdf6e3;border:3px solid #1a1a1a;border-radius:12px;font-size:14px;outline:none;font-family:inherit;font-weight:600}
+.modal button.aksi{width:100%;padding:14px;background:#fbbf24;color:#1a1a1a;border:3px solid #1a1a1a;border-radius:12px;font-size:14px;font-weight:800;cursor:pointer;box-shadow:4px 4px 0 #1a1a1a;margin-top:14px;text-transform:uppercase;font-family:inherit}
+.modal button.aksi:active{transform:translate(2px,2px);box-shadow:2px 2px 0 #1a1a1a}
+.hasil{margin-top:14px;display:none;padding:14px;background:#fdf6e3;border:3px solid #1a1a1a;border-radius:12px;font-size:13px;font-weight:600;line-height:1.6;word-break:break-word}
+.hasil img{width:100%;border-radius:8px;margin-top:8px;border:2px solid #1a1a1a}
+.hasil a.dl{display:block;padding:10px;background:#fbbf24;color:#1a1a1a;text-decoration:none;border:3px solid #1a1a1a;border-radius:10px;text-align:center;font-weight:800;margin-top:10px;font-size:12px;box-shadow:3px 3px 0 #1a1a1a;text-transform:uppercase}
+.box{background:#fff;padding:10px;border-radius:8px;margin:6px 0;border:2px solid #1a1a1a}
+.box .l{font-size:10px;color:#666;text-transform:uppercase;font-weight:800}
+.box .v{font-size:14px;font-weight:800;word-break:break-all;margin-top:2px}
+.loading{text-align:center;font-weight:800;display:none;margin-top:12px;font-size:13px}
 </style>
 </head>
 <body>
 
 <div id="loginScreen">
-  <div class="card">
-    <h1>🔥 Azka Panel</h1>
-    <p>Login dulu buat pake tools</p>
+  <div class="lcard">
+    <div class="llogo">🔥</div>
+    <h1>AZKA PANEL</h1>
+    <p>Login dulu buat akses tools</p>
     <label>Username</label>
     <input type="text" id="inpUser" placeholder="azka" autocomplete="off">
     <label>Password</label>
     <input type="password" id="inpPass" placeholder="password">
-    <button class="auth" id="btnAuth" onclick="doAuth()">Masuk</button>
-    <div class="msg" id="loginMsg"></div>
+    <button id="btnLogin" onclick="doLogin()">Masuk</button>
+    <div class="lmsg" id="loginMsg"></div>
   </div>
 </div>
 
 <div id="appScreen">
-  <div class="card">
-    <h1>🔥 Azka Panel</h1>
-    <p>Semua tools dalam satu aplikasi.</p>
-    <div class="grid">
-      <div class="tool" style="background:#bae6fd" onclick="openTool('ff')"><span class="ico">🎯</span>FREE FIRE</div>
-      <div class="tool" style="background:#bbf7d0" onclick="openTool('ml')"><span class="ico">🎮</span>ML</div>
-      <div class="tool" style="background:#fbcfe8" onclick="openTool('tiktok')"><span class="ico">⬇️</span>TIKTOK</div>
-      <div class="tool" style="background:#fef08a" onclick="openTool('pinterest')"><span class="ico">⬇️</span>PINTEREST</div>
-      <div class="tool" style="background:#ddd6fe" onclick="openTool('ai')"><span class="ico">🤖</span>AI</div>
-      <div class="tool" style="background:#fed7aa" onclick="openTool('ssweb')"><span class="ico">📸</span>SS WEB</div>
+  <div class="header">
+    <div class="menu-btn">☰</div>
+    <div class="title">AZKA PANEL</div>
+    <div class="icons">
+      <div class="ico" onclick="doLogout()">🚪</div>
+      <div class="ico" id="userIco">👤</div>
     </div>
   </div>
-  <div class="card">
-    <h2 id="profName" style="font-size:18px;margin-bottom:8px">User</h2>
-    <p id="profStatus">Member Aktif</p>
-    <button class="logout" onclick="doLogout()">🚪 Logout</button>
+  <div class="container">
+    <div class="sec-head">
+      <div class="top">
+        <h1>Kategori Menu</h1>
+        <div class="badge" id="totalMod">0 MODULES</div>
+      </div>
+      <p>Pilih kategori menu yang Anda butuhkan.</p>
+    </div>
+    <div class="grid" id="grid"></div>
+  </div>
+  <div class="bottom-nav">
+    <div class="nav-item active"><div class="ico">🏠</div>BERANDA</div>
+    <div class="nav-item"><div class="ico">📥</div>DOWNLOAD</div>
+    <div class="nav-item"><div class="ico">🕵️</div>STALKER</div>
+    <div class="nav-item"><div class="ico">🤖</div>AI</div>
+    <div class="nav-item"><div class="ico">🧰</div>UTILITY</div>
   </div>
 </div>
 
-<div id="modalX" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:999;padding:20px;overflow-y:auto"></div>
+<div class="modal-bg" id="modalBg">
+  <div class="modal">
+    <div class="modal-head">
+      <h2 id="modalTitle">Menu</h2>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div id="modalBody"></div>
+  </div>
+</div>
 
 <script>
 var API_KEY='PREMIUM03DYWHDHWHFHAJXSJFHAJS';
-var USERS = [];
+var USERS=[];
 
 async function loadUsers(){
   try{
-    var res = await fetch('users.json?t=' + Date.now());
-    var data = await res.json();
-    USERS = data.users || [];
+    var r=await fetch('users.json?t='+Date.now());
+    var j=await r.json();
+    USERS=j.users||[];
   }catch(e){
-    console.error('Gagal load users.json:', e);
-    USERS = [];
+    USERS=[{nama:'azka',password:'12345',role:'admin'}];
   }
 }
 
-async function doAuth(){
-  var nama=document.getElementById('inpUser').value.trim();
-  var password=document.getElementById('inpPass').value.trim();
+async function doLogin(){
+  var u=document.getElementById('inpUser').value.trim();
+  var p=document.getElementById('inpPass').value.trim();
   var msg=document.getElementById('loginMsg');
-  var btn=document.getElementById('btnAuth');
-  if(!nama||!password){msg.className='msg err';msg.innerText='Isi username dan password!';return;}
+  var btn=document.getElementById('btnLogin');
+  if(!u||!p){msg.className='lmsg err';msg.innerText='Isi username dan password!';return;}
   btn.disabled=true;btn.innerText='Loading...';
-  msg.className='msg';msg.innerText='';
+  msg.className='lmsg';msg.innerText='';
   await loadUsers();
-  var user = USERS.find(function(u){return u.nama.toLowerCase()===nama.toLowerCase();});
+  var user=USERS.find(function(x){return x.nama.toLowerCase()===u.toLowerCase();});
   btn.disabled=false;btn.innerText='Masuk';
-  if(!user){msg.className='msg err';msg.innerText='Username gak terdaftar!';return;}
-  if(user.password!==password){msg.className='msg err';msg.innerText='Password salah!';return;}
-  msg.className='msg ok';msg.innerText='Login berhasil!';
-  localStorage.setItem('azka_user', JSON.stringify({nama:user.nama, role:user.role}));
+  if(!user){msg.className='lmsg err';msg.innerText='Username gak terdaftar!';return;}
+  if(user.password!==p){msg.className='lmsg err';msg.innerText='Password salah!';return;}
+  msg.className='lmsg ok';msg.innerText='Login berhasil!';
+  localStorage.setItem('azka_user',JSON.stringify({nama:user.nama,role:user.role||'user'}));
   setTimeout(showApp,600);
 }
 
-function doLogout(){if(confirm('Logout?')){localStorage.removeItem('azka_user');location.reload();}}
+function doLogout(){
+  if(confirm('Yakin logout?')){
+    localStorage.removeItem('azka_user');
+    location.reload();
+  }
+}
 
 function showApp(){
   document.getElementById('loginScreen').style.display='none';
   document.getElementById('appScreen').style.display='block';
   var u=JSON.parse(localStorage.getItem('azka_user'));
-  document.getElementById('profName').innerText=u.nama;
-  document.getElementById('profStatus').innerText=(u.role==='admin'?'Admin':'Member Aktif');
+  document.getElementById('userIco').innerText=u.nama.charAt(0).toUpperCase();
+  render();
 }
 
-function closeModal(){document.getElementById('modalX').style.display='none';}
+var KATEGORI=[
+{id:'downloader',strip:'strip-red',ic:'📥',color:'#dc2626',title:'DOWNLOADER',desc:'Download video & gambar',char:'📥',items:[
+{n:'TikTok DL',d:'Download video TikTok',i:'🎵',act:'tiktok'},
+{n:'Pinterest',d:'Cari gambar Pinterest',i:'📌',act:'pinterest'}]},
+{id:'stalker',strip:'strip-green',ic:'🕵️',color:'#16a34a',title:'STALKER',desc:'Cek ID game',char:'🕵️',items:[
+{n:'FF Stalker',d:'Cek nickname Free Fire',i:'🎯',act:'ff'},
+{n:'ML Stalker',d:'Cek ID Mobile Legends',i:'🎮',act:'ml'},
+{n:'SuperSus',d:'Cek ID SuperSus',i:'👽',act:'supersus'}]},
+{id:'ai',strip:'strip-blue',ic:'🤖',color:'#2563eb',title:'AI TOOLS',desc:'Chat dengan AI',char:'🤖',items:[
+{n:'Gemini AI',d:'Tanya Gemini',i:'✨',act:'gemini'},
+{n:'Cici AI',d:'Chat sama Cici',i:'💬',act:'cici'},
+{n:'Apertus AI',d:'AI pintar',i:'🧠',act:'apertus'},
+{n:'Unlimited AI',d:'AI tanpa batas',i:'∞',act:'unliai'}]},
+{id:'utility',strip:'strip-yellow',ic:'🧰',color:'#fbbf24',title:'UTILITY',desc:'Tools berguna',char:'🧰',items:[
+{n:'SS Web',d:'Screenshot website',i:'📸',act:'ssweb'},
+{n:'Cek Domain',d:'Detail domain',i:'🌐',act:'domain'},
+{n:'QR Code',d:'Text jadi QR',i:'🔳',act:'qr'},
+{n:'Password Gen',d:'Bikin password random',i:'🔑',act:'pw'},
+{n:'OTP Gen',d:'Generate OTP',i:'🔢',act:'otp'},
+{n:'Fake Call',d:'Bikin panggilan palsu',i:'📞',act:'fakecall'}]}
+];
 
-function openTool(id){
-  var m=document.getElementById('modalX');
-  m.style.display='block';
-  var inp='style="width:100%;padding:12px;border:3px solid #1a1a1a;border-radius:10px;background:#fff;font-size:14px;outline:none;margin:6px 0"';
-  var btn='style="width:100%;padding:14px;background:#8b5cf6;color:#fff;border:3px solid #1a1a1a;border-radius:10px;font-size:15px;font-weight:800;cursor:pointer;box-shadow:4px 4px 0 #1a1a1a;margin-top:10px"';
-  var lbl='style="display:block;font-weight:700;font-size:12px;margin:8px 0 4px"';
-  var forms={
-    ff:'<label '+lbl+'>ID Free Fire</label><input type="text" id="inp-ff" placeholder="3616810990" '+inp+'><button '+btn+' onclick="runFF()">Cek</button>',
-    ml:'<label '+lbl+'>ID ML</label><input type="text" id="inp-mlid" '+inp+'><label '+lbl+'>Server</label><input type="text" id="inp-mlsv" '+inp+'><button '+btn+' onclick="runML()">Cek</button>',
-    tiktok:'<label '+lbl+'>Link TikTok</label><input type="text" id="inp-tt" '+inp+'><button '+btn+' onclick="runTT()">Download</button>',
-    pinterest:'<label '+lbl+'>Kata kunci</label><input type="text" id="inp-pin" '+inp+'><button '+btn+' onclick="runPIN()">Cari</button>',
-    ai:'<label '+lbl+'>AI</label><select id="inp-ai" '+inp+'><option value="gemini">Gemini</option><option value="cici">Cici</option><option value="unliai">Unlimited</option></select><label '+lbl+'>Pertanyaan</label><input type="text" id="inp-aip" '+inp+'><button '+btn+' onclick="runAI()">Kirim</button>',
-    ssweb:'<label '+lbl+'>URL</label><input type="text" id="inp-ssw" '+inp+'><button '+btn+' onclick="runSSW()">SS</button>'
-  };
-  var titles={ff:'🎯 Free Fire',ml:'🎮 ML',tiktok:'🎵 TikTok',pinterest:'📌 Pinterest',ai:'🤖 AI',ssweb:'📸 SS Web'};
-  m.innerHTML='<div style="max-width:440px;margin:40px auto;background:#fdf6e3;border:3px solid #1a1a1a;border-radius:20px;padding:20px;box-shadow:6px 6px 0 #1a1a1a"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:15px"><h2>'+titles[id]+'</h2><button onclick="closeModal()" style="width:34px;height:34px;background:#fecaca;border:3px solid #1a1a1a;border-radius:10px;font-weight:900;cursor:pointer">✕</button></div>'+(forms[id]||'')+'<div id="hasilX" style="margin-top:15px;display:none;padding:14px;background:#fff;border:3px solid #1a1a1a;border-radius:10px;font-size:13px"></div></div>';
+function render(){
+  var g=document.getElementById('grid');
+  g.innerHTML='';
+  var t=0;
+  KATEGORI.forEach(function(k){
+    t+=k.items.length;
+    var c='<div class="card" onclick="openKat(\''+k.id+'\')">';
+    c+='<div class="top-strip '+k.strip+'"></div>';
+    c+='<div class="char">'+k.char+'</div>';
+    c+='<div class="ic-wrap" style="background:'+k.color+';color:#fff">'+k.ic+'</div>';
+    c+='<h3>'+k.title+'</h3><p>'+k.desc+'</p></div>';
+    g.innerHTML+=c;
+  });
+  document.getElementById('totalMod').innerText=t+' MODULES';
+  }
+  function closeModal(){document.getElementById('modalBg').classList.remove('show');}
+document.getElementById('modalBg').addEventListener('click',function(e){if(e.target.id==='modalBg')closeModal();});
+
+function openKat(id){
+  var k=KATEGORI.find(function(x){return x.id===id;});
+  document.getElementById('modalTitle').innerText=k.title;
+  var h='<div class="modal-list">';
+  k.items.forEach(function(it){
+    h+='<div class="mitem" onclick="openTool(\''+it.act+'\',\''+it.n+'\')"><div class="mi">'+it.i+'</div><div class="mt"><b>'+it.n+'</b><span>'+it.d+'</span></div><div class="ar">›</div></div>';
+  });
+  h+='</div>';
+  document.getElementById('modalBody').innerHTML=h;
+  document.getElementById('modalBg').classList.add('show');
 }
 
-function setR(html){var h=document.getElementById('hasilX');h.innerHTML=html;h.style.display='block';}
+var INP='style="width:100%;padding:12px;border:3px solid #1a1a1a;border-radius:12px;background:#fdf6e3;font-size:14px;outline:none;font-weight:600"';
+var LBL='style="display:block;font-size:12px;font-weight:800;margin:12px 0 6px;text-transform:uppercase"';
+var BTN='style="width:100%;padding:14px;background:#fbbf24;color:#1a1a1a;border:3px solid #1a1a1a;border-radius:12px;font-size:14px;font-weight:800;cursor:pointer;box-shadow:4px 4px 0 #1a1a1a;margin-top:14px;text-transform:uppercase"';
+
+function openTool(act,title){
+  document.getElementById('modalTitle').innerText=title;
+  var h='';
+  if(act==='fakecall')h='<label '+LBL+'>Link Foto</label><input id="f1" type="text" placeholder="https://...jpg" '+INP+'><label '+LBL+'>Nama</label><input id="f2" type="text" placeholder="Azka" '+INP+'><label '+LBL+'>Durasi</label><input id="f3" type="text" value="00:15" '+INP+'><button '+BTN+' onclick="runFC()">Generate</button>';
+  else if(act==='ssweb')h='<label '+LBL+'>URL</label><input id="f1" type="text" placeholder="https://google.com" '+INP+'><button '+BTN+' onclick="runSSW()">Screenshot</button>';
+  else if(act==='domain')h='<label '+LBL+'>Domain</label><input id="f1" type="text" placeholder="contoh.com" '+INP+'><button '+BTN+' onclick="runDOM()">Cek</button>';
+  else if(act==='ff')h='<label '+LBL+'>ID Free Fire</label><input id="f1" type="text" placeholder="3616810990" '+INP+'><button '+BTN+' onclick="runFF()">Cek</button>';
+  else if(act==='ml')h='<label '+LBL+'>ID ML</label><input id="f1" type="text" '+INP+'><label '+LBL+'>Server</label><input id="f2" type="text" '+INP+'><button '+BTN+' onclick="runML()">Cek</button>';
+  else if(act==='supersus')h='<label '+LBL+'>Space ID</label><input id="f1" type="text" '+INP+'><button '+BTN+' onclick="runSS()">Cek</button>';
+  else if(act==='tiktok')h='<label '+LBL+'>Link TikTok</label><input id="f1" type="text" '+INP+'><button '+BTN+' onclick="runTT()">Download</button>';
+  else if(act==='pinterest')h='<label '+LBL+'>Kata kunci</label><input id="f1" type="text" placeholder="kucing lucu" '+INP+'><button '+BTN+' onclick="runPIN()">Cari</button>';
+  else if(act==='qr')h='<label '+LBL+'>Text</label><input id="f1" type="text" '+INP+'><label '+LBL+'>Size</label><input id="f2" type="text" value="400" '+INP+'><button '+BTN+' onclick="runQR()">Buat</button>';
+  else if(act==='pw')h='<label '+LBL+'>Panjang</label><input id="f1" type="text" value="12" '+INP+'><button '+BTN+' onclick="runPW()">Generate</button>';
+  else if(act==='otp')h='<label '+LBL+'>Panjang OTP</label><input id="f1" type="text" value="6" '+INP+'><button '+BTN+' onclick="runOTP()">Generate</button>';
+  else if(act==='gemini'||act==='cici'||act==='apertus'||act==='unliai')h='<label '+LBL+'>Pertanyaan</label><textarea id="f1" rows="3" placeholder="Tanya apa aja..." '+INP+'></textarea><button '+BTN+' onclick="runAI(\''+act+'\')">Kirim</button>';
+  else h='<p style="font-size:13px;color:#666;font-weight:600;padding:20px 0;text-align:center">Fitur belum tersedia.</p>';
+  h+='<div class="hasil" id="hasil"></div><div class="loading" id="load">⏳ Loading...</div>';
+  document.getElementById('modalBody').innerHTML=h;
+}
+
+function setH(html){var h=document.getElementById('hasil');h.innerHTML=html;h.style.display='block';}
+function setL(b){document.getElementById('load').style.display=b?'block':'none';}
+function box(l,v){return '<div class="box"><div class="l">'+l+'</div><div class="v">'+v+'</div></div>';}
 function api(u){return 'https://hyerls.my.id/api/'+u+'?key='+API_KEY;}
 
-async function runFF(){
-  var id=document.getElementById('inp-ff').value.trim();
-  if(!id)return alert('Isi!');
-  try{var r=await fetch(api('cekidff.php')+'&id='+id);var d=await r.json();
-    if(d.success){var x=d.data;setR('<b>OK</b><br>ID: '+x.id+'<br>Nick: '+(x.nickname||'-'));}
-    else setR('X Gagal');}catch(e){setR('X '+e.message);}
-}
+function runFC(){var a=document.getElementById('f1').value.trim(),b=document.getElementById('f2').value.trim(),c=document.getElementById('f3').value.trim();if(!a||!b||!c)return alert('Isi semua!');setH('<b>✅ Berhasil!</b><img src="'+api('fakecall.php')+'&imgUrl='+encodeURIComponent(a)+'&name='+encodeURIComponent(b)+'&durasi='+encodeURIComponent(c)+'">');}
+function runSSW(){var u=document.getElementById('f1').value.trim();if(!u)return alert('Isi!');setH('<b>✅ Screenshot</b><img src="'+api('screenshot.php')+'&url='+encodeURIComponent(u)+'">');}
+async function runDOM(){var d=document.getElementById('f1').value.trim();if(!d)return alert('Isi!');setL(true);try{var r=await fetch(api('wdomain.php')+'&domain='+encodeURIComponent(d));var j=await r.json();setL(false);if(j.success){var x=j.data||j;var h='<b>✅ Detail Domain</b>';Object.keys(x).forEach(function(k){if(typeof x[k]==='string'||typeof x[k]==='number')h+=box(k,x[k]);});setH(h);}else setH('<b>❌ Gagal</b>');}catch(e){setL(false);setH('<b>❌ '+e.message+'</b>');}}
+async function runFF(){var id=document.getElementById('f1').value.trim();if(!id)return alert('Isi!');setL(true);try{var r=await fetch(api('cekidff.php')+'&id='+id);var j=await r.json();setL(false);if(j.success){var x=j.data;setH('<b>✅ Ditemukan!</b>'+box('ID',x.id)+box('Nickname',x.nickname||'-'));}else setH('<b>❌ Gagal</b>');}catch(e){setL(false);setH('<b>❌ '+e.message+'</b>');}}
+async function runML(){var id=document.getElementById('f1').value.trim(),sv=document.getElementById('f2').value.trim();if(!id||!sv)return alert('Isi!');setL(true);try{var r=await fetch(api('cekml.php')+'&id='+id+'&server='+sv);var j=await r.json();setL(false);if(j.success){var x=j.data;setH('<b>✅ Ditemukan!</b>'+box('ID',x.id)+box('Server',x.server)+box('Nickname',x.nickname||'-'));}else setH('<b>❌ Gagal</b>');}catch(e){setL(false);setH('<b>❌ '+e.message+'</b>');}}
+async function runSS(){var id=document.getElementById('f1').value.trim();if(!id)return alert('Isi!');setL(true);try{var r=await fetch(api('supersus.php')+'&id='+id);var raw=await r.text();setL(false);var j;try{j=JSON.parse(raw);}catch(e){}if(j&&j.success){var x=j.data||j;var h='<b>✅ Ditemukan!</b>';if(x.nickname)h+=box('Nickname',x.nickname);if(x.id)h+=box('ID',x.id);setH(h);}else setH('<b>❌ Gagal</b><pre style="font-size:10px;white-space:pre-wrap">'+raw+'</pre>');}catch(e){setL(false);setH('<b>❌ '+e.message+'</b>');}}
+async function runTT(){var url=document.getElementById('f1').value.trim();if(!url)return alert('Isi!');setL(true);try{var r=await fetch(api('tiktok.php')+'&url='+encodeURIComponent(url));var raw=await r.text();setL(false);var j;try{j=JSON.parse(raw);}catch(e){}if(j&&j.success){var x=j.data||j;var vid=x.video_url||x.download_url||x.url||x.play;var h='<b>✅ Berhasil!</b>';if(x.cover)h+='<img src="'+x.cover+'">';if(vid)h+='<a class="dl" href="'+vid+'" target="_blank">📥 Download Video</a>';setH(h);}else setH('<b>❌ Gagal</b><pre style="font-size:10px;white-space:pre-wrap">'+raw+'</pre>');}catch(e){setL(false);setH('<b>❌ '+e.message+'</b>');}}
+async function runPIN(){var q=document.getElementById('f1').value.trim();if(!q)return alert('Isi!');setL(true);try{var r=await fetch(api('pint.php')+'&query='+encodeURIComponent(q));var j=await r.json();setL(false);if(j.success&&j.results){var h='<b>✅ '+j.count+' hasil</b><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px">';j.results.slice(0,6).forEach(function(it){if(it.image_url)h+='<img src="'+it.image_url+'" style="width:100%;border-radius:6px">';});h+='</div>';setH(h);}else setH('<b>❌ Gak ada</b>');}catch(e){setL(false);setH('<b>❌ '+e.message+'</b>');}}
+function runQR(){var t=document.getElementById('f1').value.trim(),s=document.getElementById('f2').value.trim()||'400';if(!t)return alert('Isi!');setH('<b>✅ QR Code</b><img src="'+api('tqr.php')+'&text='+encodeURIComponent(t)+'&size='+s+'">');}
+async function runPW(){var l=document.getElementById('f1').value.trim()||'12';setL(true);try{var r=await fetch(api('generate_password.php')+'&length='+l);var j=await r.json();setL(false);if(j.success){var x=j.data||j;var pw=x.password||x.result||x.pw||'';setH('<b>✅ Password</b>'+box('Hasil',pw||JSON.stringify(x)));}else setH('<b>❌ Gagal</b>');}catch(e){setL(false);setH('<b>❌ '+e.message+'</b>');}}
+async function runOTP(){var l=document.getElementById('f1').value.trim()||'6';setL(true);try{var r=await fetch(api('otp.php')+'&length='+l);var j=await r.json();setL(false);if(j.success){var x=j.data||j;var o=x.otp||x.code||x.result||'';setH('<b>✅ OTP</b>'+box('Kode',o||JSON.stringify(x)));}else setH('<b>❌ Gagal</b>');}catch(e){setL(false);setH('<b>❌ '+e.message+'</b>');}}
+async function runAI(m){var p=document.getElementById('f1').value.trim();if(!p)return alert('Isi!');setL(true);var map={gemini:'gemini.php?text=',cici:'cici.php?prompt=',apertus:'apertus.php?q=',unliai:'unliai.php?teks='};var url=api(map[m].split('?')[0])+'&'+map[m].split('?')[1]+encodeURIComponent(p);try{var r=await fetch(url);var raw=await r.text();setL(false);var ans=raw;try{var j=JSON.parse(raw);ans=j.result||j.response||j.answer||j.message||j.text||j.data||JSON.stringify(j);}catch(e){}setH('<b>🤖 '+m.toUpperCase()+'</b><div style="margin-top:8px">'+ans+'</div>');}catch(e){setL(false);setH('<b>❌ '+e.message+'</b>');}}
 
-async function runML(){
-  var id=document.getElementById('inp-mlid').value.trim();
-  var sv=document.getElementById('inp-mlsv').value.trim();
-  if(!id||!sv)return alert('Isi!');
-  try{var r=await fetch(api('cekml.php')+'&id='+id+'&server='+sv);var d=await r.json();
-    if(d.success){var x=d.data;setR('<b>OK</b><br>ID: '+x.id+'<br>Nick: '+(x.nickname||'-'));}
-    else setR('X Gagal');}catch(e){setR('X '+e.message);}
-}
-
-async function runTT(){
-  var url=document.getElementById('inp-tt').value.trim();
-  if(!url)return alert('Isi!');
-  try{var r=await fetch(api('tiktok.php')+'&url='+encodeURIComponent(url));var d=await r.json();
-    if(d.success){var x=d.data||d;var vid=x.video_url||x.download_url||x.url||x.play;var h='<b>OK</b><br>';if(x.cover)h+='<img src="'+x.cover+'" style="width:100%;border-radius:8px">';if(vid)h+='<a href="'+vid+'" target="_blank" style="display:block;padding:10px;background:#8b5cf6;color:#fff;text-decoration:none;border-radius:8px;text-align:center;margin-top:8px">📥 Download</a>';setR(h);}
-    else setR('X Gagal');}catch(e){setR('X '+e.message);}
-}
-
-async function runPIN(){
-  var q=document.getElementById('inp-pin').value.trim();
-  if(!q)return alert('Isi!');
-  try{var r=await fetch(api('pint.php')+'&query='+encodeURIComponent(q));var d=await r.json();
-    if(d.success&&d.results){var h='<b>OK '+d.count+' hasil</b><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px">';d.results.slice(0,6).forEach(function(it){if(it.image_url)h+='<img src="'+it.image_url+'" style="width:100%;border-radius:8px">';});h+='</div>';setR(h);}
-    else setR('X Gak ada');}catch(e){setR('X '+e.message);}
-}
-
-async function runAI(){
-  var m=document.getElementById('inp-ai').value;
-  var p=document.getElementById('inp-aip').value.trim();
-  if(!p)return alert('Isi!');
-  var map={gemini:'gemini.php?text=',cici:'cici.php?prompt=',unliai:'unliai.php?teks='};
-  var url=api(map[m].split('?')[0])+'&'+map[m].split('?')[1]+encodeURIComponent(p);
-  try{var r=await fetch(url);var raw=await r.text();var ans=raw;
-    try{var d=JSON.parse(raw);ans=d.result||d.response||d.answer||d.message||d.text||d.data||JSON.stringify(d);}catch(e){}
-    setR('<b>🤖 '+m+'</b><br>'+ans);}catch(e){setR('X '+e.message);}
-}
-
-function runSSW(){
-  var url=document.getElementById('inp-ssw').value.trim();
-  if(!url)return alert('Isi!');
-  var u=api('screenshot.php')+'&url='+encodeURIComponent(url);
-  setR('<b>OK</b><img src="'+u+'" style="width:100%;border-radius:8px;margin-top:8px">');
-}
-
-document.getElementById('inpPass').addEventListener('keypress',function(e){if(e.key==='Enter')doAuth();});
+document.getElementById('inpPass').addEventListener('keypress',function(e){if(e.key==='Enter')doLogin();});
 
 (function(){
   if(localStorage.getItem('azka_user'))showApp();
@@ -186,4 +276,4 @@ document.getElementById('inpPass').addEventListener('keypress',function(e){if(e.
 })();
 </script>
 </body>
-  </html>
+</html>
