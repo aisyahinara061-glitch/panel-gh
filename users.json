@@ -1,0 +1,7 @@
+{
+  "users": [
+    { "nama": "azka", "password": "12345", "role": "admin" },
+    { "nama": "pembeli1", "password": "rahasia123", "role": "user" },
+    { "nama": "pembeli2", "password": "password456", "role": "user" }
+  ]
+}
