@@ -1,6 +1,6 @@
 {
   "users": [
-    { "nama": "azka", "password": "12345", "role": "admin", "expired": null },
+    { "nama": "azka", "password": "12345", "role": "developer", "expired": null },
     { "nama": "ghany", "password": "12345", "role": "Reseller", "expired": "2026-9-18" }
   ]
 }
