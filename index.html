@@ -28,9 +28,19 @@ body{background:#fdf6e3;background-image:radial-gradient(#e8d9b0 1px,transparent
 .header .icons{display:flex;gap:8px}
 .header .icons .ico{width:42px;height:42px;background:#fff;border:3px solid #1a1a1a;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:18px;box-shadow:3px 3px 0 #1a1a1a;cursor:pointer}
 .container{padding:20px 18px;max-width:520px;margin:0 auto}
+.dash{background:#fff;border:3px solid #1a1a1a;border-radius:18px;padding:18px;box-shadow:5px 5px 0 #1a1a1a;margin-bottom:18px}
+.dash-top{display:flex;align-items:center;gap:14px}
+.dash-avatar{width:56px;height:56px;border-radius:50%;background:#dc2626;border:3px solid #1a1a1a;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:900;color:#fff;box-shadow:3px 3px 0 #1a1a1a;flex-shrink:0}
+.dash-name{font-family:'Archivo Black',sans-serif;font-size:16px;text-transform:uppercase}
+.dash-role{font-size:11px;color:#666;font-weight:700;margin-top:2px}
+.dash-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+.dash-box{background:#fdf6e3;border:3px solid #1a1a1a;border-radius:12px;padding:10px}
+.dash-box .l{font-size:10px;color:#666;font-weight:800;text-transform:uppercase}
+.dash-box .v{font-size:13px;font-weight:800;margin-top:2px}
+.dash-warn{margin-top:10px;padding:10px;border-radius:10px;font-size:12px;font-weight:800;display:none}
 .sec-head{margin-bottom:14px}
 .sec-head .top{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
-.sec-head h1{font-family:'Archivo Black',sans-serif;font-size:22px;text-transform:uppercase;text-decoration:underline;text-decoration-thickness:3px;text-underline-offset:6px}
+.sec-head h1{font-family:'Archivo Black',sans-serif;font-size:20px;text-transform:uppercase;text-decoration:underline;text-decoration-thickness:3px;text-underline-offset:6px}
 .sec-head .badge{background:#fbbf24;border:3px solid #1a1a1a;border-radius:10px;padding:6px 12px;font-weight:800;font-size:11px;box-shadow:3px 3px 0 #1a1a1a}
 .sec-head p{font-size:12px;color:#555;margin-top:6px;font-weight:600}
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
@@ -99,6 +109,21 @@ body{background:#fdf6e3;background-image:radial-gradient(#e8d9b0 1px,transparent
     </div>
   </div>
   <div class="container">
+    <div class="dash">
+      <div class="dash-top">
+        <div class="dash-avatar" id="dashAvatar">A</div>
+        <div style="flex:1">
+          <div class="dash-name" id="dashName">-</div>
+          <div class="dash-role" id="dashRole">-</div>
+        </div>
+      </div>
+      <div class="dash-grid">
+        <div class="dash-box"><div class="l">📅 Hari Ini</div><div class="v" id="dashToday">-</div></div>
+        <div class="dash-box"><div class="l">⏰ Expired</div><div class="v" id="dashExp">-</div></div>
+      </div>
+      <div class="dash-warn" id="dashWarn"></div>
+    </div>
+
     <div class="sec-head">
       <div class="top">
         <h1>Kategori Menu</h1>
@@ -109,11 +134,11 @@ body{background:#fdf6e3;background-image:radial-gradient(#e8d9b0 1px,transparent
     <div class="grid" id="grid"></div>
   </div>
   <div class="bottom-nav">
-    <div class="nav-item active"><div class="ico">🏠</div>BERANDA</div>
-    <div class="nav-item"><div class="ico">📥</div>DOWNLOAD</div>
-    <div class="nav-item"><div class="ico">🕵️</div>STALKER</div>
-    <div class="nav-item"><div class="ico">🤖</div>AI</div>
-    <div class="nav-item"><div class="ico">🧰</div>UTILITY</div>
+    <div class="nav-item active" onclick="filterKat('all',this)"><div class="ico">🏠</div>BERANDA</div>
+    <div class="nav-item" onclick="filterKat('downloader',this)"><div class="ico">📥</div>DOWNLOAD</div>
+    <div class="nav-item" onclick="filterKat('stalker',this)"><div class="ico">🕵️</div>STALKER</div>
+    <div class="nav-item" onclick="filterKat('ai',this)"><div class="ico">🤖</div>AI</div>
+    <div class="nav-item" onclick="filterKat('utility',this)"><div class="ico">🧰</div>UTILITY</div>
   </div>
 </div>
 
@@ -128,8 +153,9 @@ body{background:#fdf6e3;background-image:radial-gradient(#e8d9b0 1px,transparent
 </div>
 
 <script>
-var API_KEY='PREMIUM03DYWHDHWHFHAJXSJFHAJS';
+ var API_KEY='PREMIUM03DYWHDHWHFHAJXSJFHAJS';
 var USERS=[];
+var AKTIF='all';
 
 async function loadUsers(){
   try{
@@ -137,7 +163,7 @@ async function loadUsers(){
     var j=await r.json();
     USERS=j.users||[];
   }catch(e){
-    USERS=[{nama:'azka',password:'12345',role:'admin'}];
+    USERS=[{nama:'azka',password:'12345',role:'admin',expired:null}];
   }
 }
 
@@ -154,6 +180,15 @@ async function doLogin(){
   btn.disabled=false;btn.innerText='Masuk';
   if(!user){msg.className='lmsg err';msg.innerText='Username gak terdaftar!';return;}
   if(user.password!==p){msg.className='lmsg err';msg.innerText='Password salah!';return;}
+  if(user.role!=='admin' && user.expired){
+    var today=new Date();
+    var expDate=new Date(user.expired);
+    if(expDate<today){
+      msg.className='lmsg err';
+      msg.innerText='❌ Akun sudah expired! Hubungi admin.';
+      return;
+    }
+  }
   msg.className='lmsg ok';msg.innerText='Login berhasil!';
   localStorage.setItem('azka_user',JSON.stringify({nama:user.nama,role:user.role||'user'}));
   setTimeout(showApp,600);
@@ -171,6 +206,62 @@ function showApp(){
   document.getElementById('appScreen').style.display='block';
   var u=JSON.parse(localStorage.getItem('azka_user'));
   document.getElementById('userIco').innerText=u.nama.charAt(0).toUpperCase();
+  renderDashboard(u);
+  render();
+}
+
+function renderDashboard(u){
+  var user=USERS.find(function(x){return x.nama.toLowerCase()===u.nama.toLowerCase();});
+  var role=u.role||'user';
+  var hariIni=new Date();
+  var tgl=hariIni.toLocaleDateString('id-ID',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+  
+  document.getElementById('dashAvatar').innerText=u.nama.charAt(0).toUpperCase();
+  document.getElementById('dashName').innerText=u.nama;
+  document.getElementById('dashRole').innerText=(role==='admin'?'👑 Admin':'👤 Member');
+  document.getElementById('dashToday').innerText=tgl;
+  
+  var warn=document.getElementById('dashWarn');
+  warn.style.display='none';
+  
+  if(role==='admin'){
+    document.getElementById('dashExp').innerText='∞ Permanen';
+    document.getElementById('dashExp').style.color='#16a34a';
+  }else{
+    var expired=(user&&user.expired)?user.expired:null;
+    if(!expired){
+      document.getElementById('dashExp').innerText='Tidak ada';
+      document.getElementById('dashExp').style.color='#991b1b';
+    }else{
+      var expDate=new Date(expired);
+      var sisaHari=Math.ceil((expDate-hariIni)/(1000*60*60*24));
+      document.getElementById('dashExp').innerText=expDate.toLocaleDateString('id-ID',{day:'numeric',month:'short',year:'numeric'});
+      
+      if(sisaHari<0){
+        document.getElementById('dashExp').style.color='#991b1b';
+        warn.style.display='block';
+        warn.style.background='#fee2e2';
+        warn.style.color='#991b1b';
+        warn.style.border='2px solid #991b1b';
+        warn.innerText='⚠️ Akun sudah expired '+Math.abs(sisaHari)+' hari lalu!';
+      }else if(sisaHari<=7){
+        document.getElementById('dashExp').style.color='#f59e0b';
+        warn.style.display='block';
+        warn.style.background='#fef3c7';
+        warn.style.color='#92400e';
+        warn.style.border='2px solid #f59e0b';
+        warn.innerText='⚠️ Akun akan expired dalam '+sisaHari+' hari! Segera perpanjang.';
+      }else{
+        document.getElementById('dashExp').style.color='#16a34a';
+      }
+    }
+  }
+}
+
+function filterKat(id,el){
+  AKTIF=id;
+  document.querySelectorAll('.nav-item').forEach(function(n){n.classList.remove('active');});
+  el.classList.add('active');
   render();
 }
 
@@ -200,8 +291,9 @@ function render(){
   var g=document.getElementById('grid');
   g.innerHTML='';
   var t=0;
-  KATEGORI.forEach(function(k){
-    t+=k.items.length;
+  var list = AKTIF==='all' ? KATEGORI : KATEGORI.filter(function(k){return k.id===AKTIF;});
+  KATEGORI.forEach(function(k){t+=k.items.length;});
+  list.forEach(function(k){
     var c='<div class="card" onclick="openKat(\''+k.id+'\')">';
     c+='<div class="top-strip '+k.strip+'"></div>';
     c+='<div class="char">'+k.char+'</div>';
@@ -210,7 +302,7 @@ function render(){
     g.innerHTML+=c;
   });
   document.getElementById('totalMod').innerText=t+' MODULES';
-  }
+}
   function closeModal(){document.getElementById('modalBg').classList.remove('show');}
 document.getElementById('modalBg').addEventListener('click',function(e){if(e.target.id==='modalBg')closeModal();});
 
