@@ -30,7 +30,9 @@ body{background:#fdf6e3;background-image:radial-gradient(#e8d9b0 1px,transparent
 .container{padding:20px 18px;max-width:520px;margin:0 auto}
 .dash{background:#fff;border:3px solid #1a1a1a;border-radius:18px;padding:18px;box-shadow:5px 5px 0 #1a1a1a;margin-bottom:18px}
 .dash-top{display:flex;align-items:center;gap:14px}
-.dash-avatar{width:56px;height:56px;border-radius:50%;background:#dc2626;border:3px solid #1a1a1a;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:900;color:#fff;box-shadow:3px 3px 0 #1a1a1a;flex-shrink:0}
+.dash-avatar{width:56px;height:56px;border-radius:50%;background:#dc2626;border:3px solid #1a1a1a;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:900;color:#fff;box-shadow:3px 3px 0 #1a1a1a;flex-shrink:0;position:relative;cursor:pointer;overflow:visible}
+.dash-avatar img{width:100%;height:100%;border-radius:50%;object-fit:cover}
+.dash-avatar .cam{position:absolute;bottom:-4px;right:-4px;width:24px;height:24px;background:#fbbf24;border:2px solid #1a1a1a;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px}
 .dash-name{font-family:'Archivo Black',sans-serif;font-size:16px;text-transform:uppercase}
 .dash-role{font-size:12px;font-weight:800;margin-top:2px}
 .dash-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
@@ -56,6 +58,10 @@ body{background:#fdf6e3;background-image:radial-gradient(#e8d9b0 1px,transparent
 .nav-item{flex:1;min-width:56px;text-align:center;font-size:9px;font-weight:800;cursor:pointer;color:#1a1a1a;padding:6px 2px}
 .nav-item .ico{display:flex;align-items:center;justify-content:center;width:42px;height:42px;background:#fff;border:3px solid #1a1a1a;border-radius:12px;font-size:18px;margin:0 auto 6px;box-shadow:3px 3px 0 #1a1a1a}
 .nav-item.active .ico{background:#fbbf24}
+</style>
+</head>
+<body>
+<style>
 .modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:999;padding:20px;overflow-y:auto}
 .modal-bg.show{display:block}
 .modal{background:#fff;border:4px solid #1a1a1a;border-radius:22px;padding:20px;max-width:440px;margin:40px auto;box-shadow:8px 8px 0 #1a1a1a}
@@ -110,9 +116,21 @@ body{background:#fdf6e3;background-image:radial-gradient(#e8d9b0 1px,transparent
 .edit-form .btns button{flex:1;padding:8px;border:2px solid #1a1a1a;border-radius:8px;font-size:11px;font-weight:800;cursor:pointer;text-transform:uppercase;box-shadow:2px 2px 0 #1a1a1a}
 .btn-save{background:#16a34a;color:#fff}
 .btn-cancel{background:#666;color:#fff}
+.edit-foto{display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:1001;padding:20px;overflow-y:auto}
+.edit-foto.show{display:block}
+.edit-foto-box{background:#fff;border:4px solid #1a1a1a;border-radius:20px;padding:20px;max-width:360px;margin:40px auto;box-shadow:8px 8px 0 #1a1a1a;text-align:center}
+.edit-foto-box h3{font-family:'Archivo Black',sans-serif;font-size:16px;margin-bottom:14px;text-transform:uppercase}
+.edit-foto-box .preview{width:120px;height:120px;border-radius:50%;border:4px solid #1a1a1a;margin:0 auto 14px;display:flex;align-items:center;justify-content:center;font-size:48px;font-weight:900;color:#fff;background:#dc2626;overflow:hidden}
+.edit-foto-box .preview img{width:100%;height:100%;object-fit:cover}
+.edit-foto-box input[type=file]{display:none}
+.edit-foto-box .btn-upload{display:inline-block;padding:10px 20px;background:#fbbf24;color:#1a1a1a;border:3px solid #1a1a1a;border-radius:10px;font-size:13px;font-weight:800;cursor:pointer;box-shadow:3px 3px 0 #1a1a1a;margin:6px 0;text-transform:uppercase}
+.edit-foto-box .btn-save{width:100%;padding:12px;background:#16a34a;color:#fff;border:3px solid #1a1a1a;border-radius:10px;font-size:14px;font-weight:800;cursor:pointer;box-shadow:3px 3px 0 #1a1a1a;margin-top:12px;text-transform:uppercase;font-family:inherit}
+.edit-foto-box .btn-hapus{width:100%;padding:10px;background:#dc2626;color:#fff;border:3px solid #1a1a1a;border-radius:10px;font-size:13px;font-weight:800;cursor:pointer;box-shadow:3px 3px 0 #1a1a1a;margin-top:8px;text-transform:uppercase;font-family:inherit}
+.edit-foto-box .btn-batal{width:100%;padding:10px;background:#666;color:#fff;border:3px solid #1a1a1a;border-radius:10px;font-size:13px;font-weight:800;cursor:pointer;box-shadow:3px 3px 0 #1a1a1a;margin-top:8px;text-transform:uppercase;font-family:inherit}
 </style>
 </head>
 <body>
+
 <div class="sb-overlay" id="sbOverlay" onclick="closeSb()"></div>
 <div class="sidebar" id="sidebar">
   <div class="sb-head">
@@ -148,7 +166,10 @@ body{background:#fdf6e3;background-image:radial-gradient(#e8d9b0 1px,transparent
   <div class="container">
     <div class="dash">
       <div class="dash-top">
-        <div class="dash-avatar" id="dashAvatar">A</div>
+        <div class="dash-avatar" id="dashAvatar" onclick="openEditFoto()">
+          <span id="dashAvatarText">A</span>
+          <div class="cam">📷</div>
+        </div>
         <div style="flex:1">
           <div class="dash-name" id="dashName">-</div>
           <div class="dash-role" id="dashRole">-</div>
@@ -187,6 +208,19 @@ body{background:#fdf6e3;background-image:radial-gradient(#e8d9b0 1px,transparent
       <button class="modal-close" onclick="closeModal()">✕</button>
     </div>
     <div id="modalBody"></div>
+  </div>
+</div>
+
+<div class="edit-foto" id="editFotoModal">
+  <div class="edit-foto-box">
+    <h3>📷 Ganti Foto Profil</h3>
+    <div class="preview" id="fotoPreview">A</div>
+    <input type="file" id="fotoInput" accept="image/*" onchange="pilihFoto(this)">
+    <label for="fotoInput" class="btn-upload">📁 Pilih Foto</label>
+    <div style="font-size:11px;color:#666;font-weight:600;margin-top:6px">Max 500 KB</div>
+    <button class="btn-save" onclick="simpanFoto()">✅ Simpan</button>
+    <button class="btn-hapus" onclick="hapusFoto()">🗑️ Hapus Foto</button>
+    <button class="btn-batal" onclick="closeEditFoto()">Batal</button>
   </div>
 </div>
 
@@ -246,6 +280,7 @@ function showApp(){
   var u=JSON.parse(localStorage.getItem('azka_user'));
   document.getElementById('userIco').innerText=u.nama.charAt(0).toUpperCase();
   renderDashboard(u);
+  updateAvatar();
   render();
 }
 
@@ -254,7 +289,6 @@ function renderDashboard(u){
   var role=u.role||'user';
   var hariIni=new Date();
   var tgl=hariIni.toLocaleDateString('id-ID',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
-  document.getElementById('dashAvatar').innerText=u.nama.charAt(0).toUpperCase();
   document.getElementById('dashName').innerText=u.nama;
   var roleLabel={'developer':'⚡ Developer','owner':'🔱 Owner','admin':'👑 Admin','moderator':'🛡️ Moderator','vip':'💎 VIP','reseller':'🏪 Reseller','user':'👤 Member'};
   var roleColor={'developer':'#8b5cf6','owner':'#dc2626','admin':'#f59e0b','moderator':'#3b82f6','vip':'#ec4899','reseller':'#16a34a','user':'#666'};
@@ -298,6 +332,77 @@ function filterKat(id,el){
   render();
 }
 
+// ===== FOTO PROFIL =====
+var tempFoto=null;
+
+function openEditFoto(){
+  var u=JSON.parse(localStorage.getItem('azka_user')||'{}');
+  var foto=localStorage.getItem('foto_'+u.nama);
+  var preview=document.getElementById('fotoPreview');
+  if(foto){preview.innerHTML='<img src="'+foto+'">';}
+  else{preview.innerHTML=u.nama.charAt(0).toUpperCase();}
+  tempFoto=foto;
+  document.getElementById('editFotoModal').classList.add('show');
+}
+
+function closeEditFoto(){
+  document.getElementById('editFotoModal').classList.remove('show');
+  tempFoto=null;
+}
+
+function pilihFoto(input){
+  var file=input.files[0];
+  if(!file)return;
+  if(file.size>500*1024){alert('⚠️ Foto kegedean! Max 500 KB.');return;}
+  var reader=new FileReader();
+  reader.onload=function(e){
+    tempFoto=e.target.result;
+    document.getElementById('fotoPreview').innerHTML='<img src="'+tempFoto+'">';
+  };
+  reader.readAsDataURL(file);
+}
+
+function simpanFoto(){
+  if(!tempFoto){alert('⚠️ Pilih foto dulu!');return;}
+  var u=JSON.parse(localStorage.getItem('azka_user')||'{}');
+  localStorage.setItem('foto_'+u.nama,tempFoto);
+  updateAvatar();
+  closeEditFoto();
+  alert('✅ Foto profil disimpan!');
+}
+
+function hapusFoto(){
+  if(!confirm('Hapus foto profil?'))return;
+  var u=JSON.parse(localStorage.getItem('azka_user')||'{}');
+  localStorage.removeItem('foto_'+u.nama);
+  updateAvatar();
+  closeEditFoto();
+  alert('🗑️ Foto profil dihapus!');
+}
+
+function updateAvatar(){
+  var u=JSON.parse(localStorage.getItem('azka_user')||'{}');
+  var foto=localStorage.getItem('foto_'+u.nama);
+  var av=document.getElementById('dashAvatar');
+  if(!av)return;
+  av.innerHTML='';
+  if(foto){
+    var img=document.createElement('img');
+    img.src=foto;
+    av.appendChild(img);
+  }else{
+    var span=document.createElement('span');
+    span.id='dashAvatarText';
+    span.innerText=u.nama.charAt(0).toUpperCase();
+    av.appendChild(span);
+  }
+  var cam=document.createElement('div');
+  cam.className='cam';
+  cam.innerText='📷';
+  av.appendChild(cam);
+}
+
+// ===== SIDEBAR =====
 function openSb(){
   var u=JSON.parse(localStorage.getItem('azka_user')||'{}');
   var role=u.role||'user';
@@ -336,14 +441,16 @@ function renderSb(){
     h+='</div>';
   }
   USERS.forEach(function(x, idx){
+    // Developer bisa liat semua. Owner gak bisa liat developer.
+    var bisaLiatPw = (role === 'developer') || (role === 'owner' && x.role !== 'developer');
     var roleColor={'developer':'#8b5cf6','owner':'#dc2626','admin':'#f59e0b','moderator':'#3b82f6','vip':'#ec4899','reseller':'#16a34a','user':'#666'};
     h+='<div class="sb-user">';
     h+='<div class="top"><span class="nm">'+x.nama+'</span>';
     h+='<span class="rl" style="background:'+(roleColor[x.role]||'#666')+'">'+(x.role||'user').toUpperCase()+'</span></div>';
-    h+='<div class="row">👤 Username: <b>'+x.nama+'</b></div>';
-    h+='<div class="row">🔑 Password: <b>'+x.password+'</b></div>';
+    h+='<div class="row">👤 Username: <b>'+(bisaLiatPw ? x.nama : '•••••••')+'</b></div>';
+    h+='<div class="row">🔑 Password: <b>'+(bisaLiatPw ? x.password : '•••••••')+'</b></div>';
     h+='<div class="row">⏰ Expired: <b>'+(x.expired||'∞ Permanen')+'</b></div>';
-    if(bisaEdit){
+    if(bisaLiatPw){
       h+='<div class="sb-actions">';
       h+='<button class="sb-btn edit" onclick="showEditForm('+idx+')">✏️ Edit</button>';
       h+='<button class="sb-btn del" onclick="delUser('+idx+')">🗑️ Hapus</button>';
@@ -359,6 +466,8 @@ function renderSb(){
       h+='<label>Expired (kosongin kalo permanen)</label><input type="text" id="editExp'+idx+'" value="'+(x.expired||'')+'" placeholder="2027-12-31">';
       h+='<div class="btns"><button class="btn-save" onclick="saveEdit('+idx+')">Simpan</button><button class="btn-cancel" onclick="hideEditForm('+idx+')">Batal</button></div>';
       h+='</div>';
+    }else{
+      h+='<div style="margin-top:8px;padding:8px;background:#fee2e2;border:2px solid #991b1b;border-radius:8px;font-size:10px;font-weight:800;color:#991b1b;text-align:center">🔒 Akses Terkunci</div>';
     }
     h+='</div>';
   });
@@ -387,7 +496,7 @@ function addUser(){
   USERS.push({nama:nm,password:pw,role:rl,expired:ex});
   renderSb();
   copyToClipboard(JSON.stringify({users:USERS},null,2));
-  alert('✅ User '+nm+' ditambah!\n\n📋 users.json udah dicopy ke clipboard. Paste di GitHub!');
+  alert('✅ User '+nm+' ditambah!\n\n📋 users.json dicopy ke clipboard. Paste di GitHub!');
 }
 
 function saveEdit(i){
@@ -425,7 +534,7 @@ var KATEGORI=[
 {n:'Kisah Nabi',d:'Cerita 25 nabi',i:'📖',act:'kisahnabi'},
 {n:'Jadwal Sholat',d:'Waktu sholat hari ini',i:'🕐',act:'sholat'},
 {n:'Daftar Surat',d:'114 surat Al-Quran',i:'📚',act:'quransurat'},
-{n:'Detail Ayat',d:'Baca ayat Quran',i:'🕋',act:'quranayat'}]},
+{n:'Info Surat',d:'Detail info surat',i:'🕋',act:'quranayat'}]},
 {id:'ai',strip:'strip-blue',ic:'🤖',color:'#2563eb',title:'AI TOOLS',desc:'Chat & edit gambar AI',char:'🤖',items:[
 {n:'Gemini AI',d:'Tanya Gemini',i:'✨',act:'gemini'},
 {n:'Cici AI',d:'Chat sama Cici',i:'💬',act:'cici'},
@@ -501,7 +610,7 @@ function openTool(act,title){
   else if(act==='kisahnabi')h='<label '+LBL+'>Nama Nabi</label><input id="f1" type="text" placeholder="muhammad" '+INP+'><p style="font-size:11px;color:#666;font-weight:600;margin-top:6px">Contoh: muhammad, isa, musa, adam, nuh, ibrahim</p><button '+BTN+' onclick="runKisahNabi()">Cari</button>';
   else if(act==='sholat')h='<label '+LBL+'>Kota</label><input id="f1" type="text" placeholder="Jakarta" '+INP+'><button '+BTN+' onclick="runSholat()">Lihat Jadwal</button>';
   else if(act==='quransurat')h='<p style="text-align:center;font-size:13px;color:#666;font-weight:600;margin-bottom:10px">Daftar 114 surat Al-Quran</p><button '+BTN+' onclick="runQuranSurat()">📚 Tampilkan Surat</button>';
-  else if(act==='quranayat')h='<label '+LBL+'>Nomor Surat (1-114)</label><input id="f1" type="text" placeholder="1" '+INP+'><button '+BTN+' onclick="runQuranAyat()">Baca Ayat</button>';
+  else if(act==='quranayat')h='<label '+LBL+'>Nomor Surat (1-114)</label><input id="f1" type="text" placeholder="1" '+INP+'><button '+BTN+' onclick="runQuranAyat()">Lihat Info</button>';
   else if(act==='qr')h='<label '+LBL+'>Text</label><input id="f1" type="text" '+INP+'><label '+LBL+'>Size</label><input id="f2" type="text" value="400" '+INP+'><button '+BTN+' onclick="runQR()">Buat</button>';
   else if(act==='pw')h='<label '+LBL+'>Panjang</label><input id="f1" type="text" value="12" '+INP+'><button '+BTN+' onclick="runPW()">Generate</button>';
   else if(act==='otp')h='<label '+LBL+'>Panjang OTP</label><input id="f1" type="text" value="6" '+INP+'><button '+BTN+' onclick="runOTP()">Generate</button>';
@@ -516,10 +625,15 @@ function setL(b){document.getElementById('load').style.display=b?'block':'none';
 function box(l,v){return '<div class="box"><div class="l">'+l+'</div><div class="v">'+v+'</div></div>';}
 function api(u){return 'https://hyerls.my.id/api/'+u+'?key='+API_KEY;}
 async function runQuotes(){setL(true);try{var r=await fetch(api('quotes.php'));var j=await r.json();setL(false);if(j.success){var h='<div style="padding:16px;background:#fff;border:3px solid #1a1a1a;border-radius:12px;box-shadow:4px 4px 0 #1a1a1a"><div style="font-size:32px;text-align:center;margin-bottom:8px">💭</div><div style="font-size:14px;font-weight:700;line-height:1.6;font-style:italic">"'+j.quote+'"</div><div style="margin-top:12px;font-size:12px;font-weight:800;color:#666;text-align:right">— '+j.author+'</div></div><button '+BTN+' onclick="runQuotes()">🔄 Quote Lagi</button>';setH(h);}else setH('<b>❌ Gagal</b>');}catch(e){setL(false);setH('<b>❌ '+e.message+'</b>');}}
+
 async function runKisahNabi(){var nabi=document.getElementById('f1').value.trim().toLowerCase();if(!nabi)return alert('Isi!');setL(true);try{var r=await fetch(api('kisahnabi.php')+'&nabi='+encodeURIComponent(nabi));var raw=await r.text();setL(false);var j;try{j=JSON.parse(raw);}catch(e){}if(j&&j.success){var h='<b>📖 '+(j.nabi||nabi)+'</b>';if(j.tahun_kelahiran)h+=box('Tahun Kelahiran',j.tahun_kelahiran);if(j.tempat)h+=box('Tempat',j.tempat);if(j.umur)h+=box('Umur',j.umur);if(j.deskripsi)h+='<div style="margin-top:10px;line-height:1.7;font-size:13px">'+j.deskripsi+'</div>';if(j.kisah)h+='<div style="margin-top:10px;line-height:1.7;font-size:13px">'+j.kisah+'</div>';if(!j.kisah&&!j.deskripsi)h+='<pre style="font-size:10px;white-space:pre-wrap">'+raw+'</pre>';setH(h);}else setH('<b>❌ Nabi gak ditemukan</b><pre style="font-size:10px;white-space:pre-wrap">'+raw+'</pre>');}catch(e){setL(false);setH('<b>❌ '+e.message+'</b>');}}
+
 async function runSholat(){var kota=document.getElementById('f1').value.trim();if(!kota)return alert('Isi!');setL(true);try{var r=await fetch(api('jadwalshalat.php')+'&kota='+encodeURIComponent(kota));var j=await r.json();setL(false);if(j.success){var d=j.data;var h='<b>🕌 '+d.lokasi+'</b>';h+='<div style="font-size:11px;color:#666;font-weight:700;margin-bottom:10px">'+d.tanggal_masehi+' · '+d.tanggal_hijriyah+'</div>';var jdw=d.jadwal;var list=[['Imsak',jdw.Imsak],['Subuh',jdw.Fajr],['Terbit',jdw.Sunrise],['Dzuhur',jdw.Dhuhr],['Ashar',jdw.Asr],['Maghrib',jdw.Maghrib],['Isya',jdw.Isha]];list.forEach(function(x){h+='<div style="display:flex;justify-content:space-between;padding:8px 10px;background:#fff;border:2px solid #1a1a1a;border-radius:8px;margin:6px 0;font-weight:700"><span>'+x[0]+'</span><span style="color:#16a34a">'+x[1]+'</span></div>';});setH(h);}else setH('<b>❌ Kota gak ditemukan</b>');}catch(e){setL(false);setH('<b>❌ '+e.message+'</b>');}}
+
 async function runQuranSurat(){setL(true);try{var r=await fetch(api('quransurat.php'));var raw=await r.text();setL(false);var j;try{j=JSON.parse(raw);}catch(e){}if(j&&j.success){var list=j.data||j.surat||j.result||[];var h='<b>📚 Daftar Surat</b>';list.forEach(function(s){var no=s.nomor||s.number||s.id||'';var nm=s.nama||s.name||s.latin||'';var ar2=s.arti||s.meaning||'';var ayt=s.ayat||s.verses||s.count||'';h+='<div style="padding:10px;background:#fff;border:2px solid #1a1a1a;border-radius:8px;margin:6px 0;font-weight:700"><span style="display:inline-block;width:30px">'+no+'.</span>'+nm+' <span style="font-size:11px;color:#666">('+ayt+' ayat)</span><div style="font-size:11px;color:#666;margin-top:2px">'+ar2+'</div></div>';});setH(h);}else setH('<b>❌ Gagal</b><pre style="font-size:10px;white-space:pre-wrap">'+raw.slice(0,300)+'</pre>');}catch(e){setL(false);setH('<b>❌ '+e.message+'</b>');}}
-async function runQuranAyat(){var id=document.getElementById('f1').value.trim();if(!id)return alert('Isi!');setL(true);try{var r=await fetch(api('quranayat.php')+'&id='+id);var raw=await r.text();setL(false);var j;try{j=JSON.parse(raw);}catch(e){}if(j&&j.success){var list=j.data||j.ayat||j.result||[];var h='<b>🕋 Surat '+id+'</b>';list.forEach(function(a){var no=a.nomor||a.number||a.id||'';var ar=a.ar||a.arab||a.arabic||'';var lt=a.tr||a.latin||a.translation||'';h+='<div style="padding:12px;background:#fff;border:2px solid #1a1a1a;border-radius:8px;margin:8px 0"><div style="font-size:11px;color:#16a34a;font-weight:800;margin-bottom:6px">Ayat '+no+'</div>';if(ar)h+='<div style="font-size:18px;text-align:right;line-height:1.8;margin-bottom:8px">'+ar+'</div>';if(lt)h+='<div style="font-size:12px;color:#333;line-height:1.6;font-style:italic">'+lt+'</div>';h+='</div>';});setH(h);}else setH('<b>❌ Gagal</b><pre style="font-size:10px;white-space:pre-wrap">'+raw.slice(0,300)+'</pre>');}catch(e){setL(false);setH('<b>❌ '+e.message+'</b>');}}
+
+async function runQuranAyat(){var id=document.getElementById('f1').value.trim();if(!id)return alert('Isi!');setL(true);try{var r=await fetch(api('quranayat.php')+'&id='+id);var j=await r.json();setL(false);if(j.success&&j.data){var d=j.data;var h='<b>🕋 '+d.nama_latin+'</b>';h+='<div style="font-size:22px;text-align:right;line-height:1.6;margin:10px 0;color:#16a34a">'+d.nama_arab+'</div>';h+=box('Nomor Surat',d.nomor);h+=box('Arti',d.arti);h+=box('Tempat Turun',d.tempat_turun);h+=box('Jumlah Ayat',d.jumlah_ayat);if(d.deskripsi)h+='<div style="margin-top:12px;padding:12px;background:#fff;border:2px solid #1a1a1a;border-radius:8px;font-size:12px;line-height:1.7">'+d.deskripsi+'</div>';setH(h);}else setH('<b>❌ Surat gak ditemukan</b>');}catch(e){setL(false);setH('<b>❌ '+e.message+'</b>');}}
+
 function runFC(){var a=document.getElementById('f1').value.trim(),b=document.getElementById('f2').value.trim(),c=document.getElementById('f3').value.trim();if(!a||!b||!c)return alert('Isi semua!');setH('<b>✅ Berhasil!</b><img src="'+api('fakecall.php')+'&imgUrl='+encodeURIComponent(a)+'&name='+encodeURIComponent(b)+'&durasi='+encodeURIComponent(c)+'">');}
 function runSSW(){var u=document.getElementById('f1').value.trim();if(!u)return alert('Isi!');var x=api('screenshot.php')+'&url='+encodeURIComponent(u);setH('<b>✅ Screenshot</b><img src="'+x+'"><a class="dl" href="'+x+'" target="_blank">🔗 Buka di Tab Baru</a>');}
 async function runDOM(){var d=document.getElementById('f1').value.trim();if(!d)return alert('Isi!');setL(true);try{var r=await fetch(api('wdomain.php')+'&domain='+encodeURIComponent(d));var j=await r.json();setL(false);if(j.success){var x=j.data||j;var h='<b>✅ Detail Domain</b>';Object.keys(x).forEach(function(k){if(typeof x[k]==='string'||typeof x[k]==='number')h+=box(k,x[k]);});setH(h);}else setH('<b>❌ Gagal</b>');}catch(e){setL(false);setH('<b>❌ '+e.message+'</b>');}}
