@@ -30,12 +30,14 @@ body{background:#7f1d1d;background-image:radial-gradient(#991b1b 1px,transparent
 .header .icons .ico{width:42px;height:42px;background:#fff;border:3px solid #450a0a;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:18px;box-shadow:3px 3px 0 #450a0a;cursor:pointer;color:#450a0a}
 </style>
 <style>
-#appScreen{display:none;padding-bottom:120px}
-.header{background:#b91c1c;border-bottom:4px solid #450a0a;padding:16px 18px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:50;box-shadow:0 4px 0 #450a0a}
-.header .menu-btn{width:42px;height:42px;background:#fff;border:3px solid #450a0a;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;box-shadow:3px 3px 0 #450a0a;font-weight:900;cursor:pointer;color:#450a0a}
-.header .title{flex:1;text-align:center;font-family:'Archivo Black',sans-serif;font-size:20px;color:#fff;letter-spacing:1px;text-shadow:2px 2px 0 #450a0a}
-.header .icons{display:flex;gap:8px}
-.header .icons .ico{width:42px;height:42px;background:#fff;border:3px solid #450a0a;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:18px;box-shadow:3px 3px 0 #450a0a;cursor:pointer;color:#450a0a}
+.container{padding:20px 18px;max-width:520px;margin:0 auto}
+.dash{background:#fff;border:3px solid #450a0a;border-radius:18px;padding:18px;box-shadow:5px 5px 0 #450a0a;margin-bottom:18px;color:#450a0a}
+.dash-top{display:flex;align-items:center;gap:14px}
+.dash-avatar{width:56px;height:56px;min-width:56px;min-height:56px;max-width:56px;max-height:56px;border-radius:50%;background:#dc2626;border:3px solid #450a0a;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:900;color:#fff;box-shadow:3px 3px 0 #450a0a;flex-shrink:0;position:relative;cursor:pointer;overflow:visible}
+.dash-avatar img{width:100%;height:100%;max-width:56px;max-height:56px;border-radius:50%;object-fit:cover;display:block}
+.dash-avatar .cam{position:absolute;bottom:-4px;right:-4px;width:24px;height:24px;background:#fbbf24;border:2px solid #450a0a;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px}
+.dash-name{font-family:'Archivo Black',sans-serif;font-size:16px;text-transform:uppercase;color:#450a0a}
+.dash-role{font-size:12px;font-weight:800;margin-top:2px}
 </style>
 <style>
 .dash-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
@@ -131,8 +133,8 @@ body{background:#7f1d1d;background-image:radial-gradient(#991b1b 1px,transparent
 .edit-foto.show{display:block}
 .edit-foto-box{background:#fff;border:4px solid #450a0a;border-radius:20px;padding:20px;max-width:360px;margin:40px auto;box-shadow:8px 8px 0 #450a0a;text-align:center;color:#450a0a}
 .edit-foto-box h3{font-family:'Archivo Black',sans-serif;font-size:16px;margin-bottom:14px;text-transform:uppercase}
-.edit-foto-box .preview{width:120px;height:120px;border-radius:50%;border:4px solid #450a0a;margin:0 auto 14px;display:flex;align-items:center;justify-content:center;font-size:48px;font-weight:900;color:#fff;background:#dc2626;overflow:hidden}
-.edit-foto-box .preview img{width:100%;height:100%;object-fit:cover}
+.edit-foto-box .preview{width:120px;height:120px;min-width:120px;min-height:120px;max-width:120px;max-height:120px;border-radius:50%;border:4px solid #450a0a;margin:0 auto 14px;display:flex;align-items:center;justify-content:center;font-size:48px;font-weight:900;color:#fff;background:#dc2626;overflow:hidden}
+.edit-foto-box .preview img{width:100%;height:100%;max-width:120px;max-height:120px;object-fit:cover;border-radius:50%;display:block}
 .edit-foto-box input[type=file]{display:none}
 .edit-foto-box .btn-upload{display:inline-block;padding:10px 20px;background:#fbbf24;color:#450a0a;border:3px solid #450a0a;border-radius:10px;font-size:13px;font-weight:800;cursor:pointer;box-shadow:3px 3px 0 #450a0a;margin:6px 0;text-transform:uppercase}
 .edit-foto-box .btn-save{width:100%;padding:12px;background:#16a34a;color:#fff;border:3px solid #450a0a;border-radius:10px;font-size:14px;font-weight:800;cursor:pointer;box-shadow:3px 3px 0 #450a0a;margin-top:12px;text-transform:uppercase;font-family:inherit}
@@ -225,7 +227,7 @@ body{background:#7f1d1d;background-image:radial-gradient(#991b1b 1px,transparent
     <div class="preview" id="fotoPreview">A</div>
     <input type="file" id="fotoInput" accept="image/*" onchange="pilihFoto(this)">
     <label for="fotoInput" class="btn-upload">📁 Pilih Foto</label>
-    <div style="font-size:11px;color:#666;font-weight:600;margin-top:6px">Max 500 KB</div>
+    <div style="font-size:11px;color:#666;font-weight:600;margin-top:6px">Max 200 KB</div>
     <button class="btn-save" onclick="simpanFoto()">✅ Simpan</button>
     <button class="btn-hapus" onclick="hapusFoto()">🗑️ Hapus Foto</button>
     <button class="btn-batal" onclick="closeEditFoto()">Batal</button>
@@ -235,6 +237,18 @@ body{background:#7f1d1d;background-image:radial-gradient(#991b1b 1px,transparent
 var API_KEY='PREMIUM03DYWHDHWHFHAJXSJFHAJS';
 var USERS=[];
 var AKTIF='all';
+
+function cleanupFotoLama(){
+  try{
+    var u=JSON.parse(localStorage.getItem('azka_user')||'{}');
+    if(!u.nama)return;
+    var key='foto_'+u.nama;
+    var foto=localStorage.getItem(key);
+    if(foto && foto.length > 200000){
+      localStorage.removeItem(key);
+    }
+  }catch(e){}
+}
 
 async function loadUsers(){
   try{
@@ -286,6 +300,7 @@ function showApp(){
   document.getElementById('appScreen').style.display='block';
   var u=JSON.parse(localStorage.getItem('azka_user'));
   document.getElementById('userIco').innerText=u.nama.charAt(0).toUpperCase();
+  cleanupFotoLama();
   renderDashboard(u);
   updateAvatar();
   render();
@@ -347,9 +362,9 @@ function openEditFoto(){
   var u=JSON.parse(localStorage.getItem('azka_user')||'{}');
   var foto=localStorage.getItem('foto_'+u.nama);
   var preview=document.getElementById('fotoPreview');
-  if(foto){preview.innerHTML='<img src="'+foto+'">';}
-  else{preview.innerHTML=u.nama.charAt(0).toUpperCase();}
-  tempFoto=foto;
+  if(foto && foto.length<200000){preview.innerHTML='<img src="'+foto+'">';}
+  else{preview.innerHTML=(u.nama||'A').charAt(0).toUpperCase();}
+  tempFoto=(foto && foto.length<200000)?foto:null;
   document.getElementById('editFotoModal').classList.add('show');
 }
 
@@ -361,10 +376,15 @@ function closeEditFoto(){
 function pilihFoto(input){
   var file=input.files[0];
   if(!file)return;
-  if(file.size>500*1024){alert('⚠️ Foto kegedean! Max 500 KB.');return;}
+  if(file.size>200*1024){alert('⚠️ Foto kegedean! Max 200 KB.\n\nKompres dulu di tinypng.com');return;}
   var reader=new FileReader();
   reader.onload=function(e){
     tempFoto=e.target.result;
+    if(tempFoto.length>200000){
+      alert('⚠️ Foto terlalu besar. Pakai foto yang lebih kecil.');
+      tempFoto=null;
+      return;
+    }
     document.getElementById('fotoPreview').innerHTML='<img src="'+tempFoto+'">';
   };
   reader.readAsDataURL(file);
@@ -372,8 +392,14 @@ function pilihFoto(input){
 
 function simpanFoto(){
   if(!tempFoto){alert('⚠️ Pilih foto dulu!');return;}
+  if(tempFoto.length>200000){alert('⚠️ Foto kegedean!');return;}
   var u=JSON.parse(localStorage.getItem('azka_user')||'{}');
-  localStorage.setItem('foto_'+u.nama,tempFoto);
+  try{
+    localStorage.setItem('foto_'+u.nama,tempFoto);
+  }catch(e){
+    alert('❌ Storage penuh! Pakai foto lebih kecil.');
+    return;
+  }
   updateAvatar();
   closeEditFoto();
   alert('✅ Foto profil disimpan!');
@@ -393,15 +419,22 @@ function updateAvatar(){
   var foto=localStorage.getItem('foto_'+u.nama);
   var av=document.getElementById('dashAvatar');
   if(!av)return;
+  if(foto && foto.length>200000){
+    localStorage.removeItem('foto_'+u.nama);
+    foto=null;
+  }
   av.innerHTML='';
   if(foto){
     var img=document.createElement('img');
     img.src=foto;
+    img.style.width='100%';
+    img.style.height='100%';
+    img.style.objectFit='cover';
     av.appendChild(img);
   }else{
     var span=document.createElement('span');
     span.id='dashAvatarText';
-    span.innerText=u.nama.charAt(0).toUpperCase();
+    span.innerText=(u.nama||'A').charAt(0).toUpperCase();
     av.appendChild(span);
   }
   var cam=document.createElement('div');
