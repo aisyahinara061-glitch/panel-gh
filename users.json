@@ -17,12 +17,6 @@
       "password": "210113",
       "role": "reseller",
       "expired": "2026-9-20"
-    },
-    {
-      "nama": "Bew",
-      "password": "12345",
-      "role": "owner",
-      "expired": null
     }
   ]
 }
