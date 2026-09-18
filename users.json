@@ -11,12 +11,6 @@
       "password": "12345",
       "role": "user",
       "expired": "2026-9-30"
-    },
-    {
-      "nama": "Lanz",
-      "password": "210113",
-      "role": "reseller",
-      "expired": "2026-9-20"
     }
   ]
 }
