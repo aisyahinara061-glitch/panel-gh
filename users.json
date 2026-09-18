@@ -5,12 +5,6 @@
       "password": "TheGhost124",
       "role": "developer",
       "expired": null
-    },
-    {
-      "nama": "Ghany",
-      "password": "12345",
-      "role": "owner",
-      "expired": "2026-9-18"
     }
   ]
 }
