@@ -23,12 +23,6 @@
       "password": "210113",
       "role": "reseller",
       "expired": "2026-9-20"
-    },
-    {
-      "nama": "Ghany12",
-      "password": "12345",
-      "role": "developer",
-      "expired": null
     }
   ]
 }
