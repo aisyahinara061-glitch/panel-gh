@@ -7,130 +7,140 @@
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Plus Jakarta Sans',sans-serif;-webkit-tap-highlight-color:transparent}
-body{background:#fdf6e3;background-image:radial-gradient(#e8d9b0 1px,transparent 1px);background-size:18px 18px;color:#1a1a1a;min-height:100vh}
+body{background:#7f1d1d;background-image:radial-gradient(#991b1b 1px,transparent 1px);background-size:18px 18px;color:#fff;min-height:100vh}
 #loginScreen{display:flex;align-items:center;justify-content:center;min-height:100vh;padding:20px}
-.lcard{background:#fff;border:4px solid #1a1a1a;border-radius:24px;padding:30px 24px;box-shadow:8px 8px 0 #1a1a1a;width:100%;max-width:400px;text-align:center}
-.llogo{width:80px;height:80px;margin:0 auto 16px;background:#dc2626;border:4px solid #1a1a1a;border-radius:22px;display:flex;align-items:center;justify-content:center;font-size:38px;box-shadow:5px 5px 0 #1a1a1a}
-.lcard h1{font-family:'Archivo Black',sans-serif;font-size:24px;margin-bottom:6px}
-.lcard p{font-size:12px;color:#666;margin-bottom:22px;font-weight:600}
-.lcard label{display:block;text-align:left;font-size:12px;font-weight:800;margin:10px 0 6px;text-transform:uppercase}
-.lcard input{width:100%;padding:14px;border:3px solid #1a1a1a;border-radius:12px;background:#fdf6e3;font-size:14px;outline:none;font-family:inherit;font-weight:600}
-.lcard button{width:100%;padding:15px;background:#dc2626;color:#fff;border:3px solid #1a1a1a;border-radius:12px;font-size:15px;font-weight:800;cursor:pointer;box-shadow:4px 4px 0 #1a1a1a;margin-top:18px;text-transform:uppercase;font-family:inherit}
-.lcard button:active{transform:translate(2px,2px);box-shadow:2px 2px 0 #1a1a1a}
+.lcard{background:#fff;border:4px solid #450a0a;border-radius:24px;padding:30px 24px;box-shadow:8px 8px 0 #450a0a;width:100%;max-width:400px;text-align:center}
+.llogo{width:80px;height:80px;margin:0 auto 16px;background:#dc2626;border:4px solid #450a0a;border-radius:22px;display:flex;align-items:center;justify-content:center;font-size:38px;box-shadow:5px 5px 0 #450a0a}
+.lcard h1{font-family:'Archivo Black',sans-serif;font-size:24px;margin-bottom:6px;color:#450a0a}
+.lcard p{font-size:12px;color:#991b1b;margin-bottom:22px;font-weight:600}
+.lcard label{display:block;text-align:left;font-size:12px;font-weight:800;margin:10px 0 6px;text-transform:uppercase;color:#450a0a}
+.lcard input{width:100%;padding:14px;border:3px solid #450a0a;border-radius:12px;background:#fef2f2;font-size:14px;outline:none;font-family:inherit;font-weight:600;color:#450a0a}
+.lcard button{width:100%;padding:15px;background:#dc2626;color:#fff;border:3px solid #450a0a;border-radius:12px;font-size:15px;font-weight:800;cursor:pointer;box-shadow:4px 4px 0 #450a0a;margin-top:18px;text-transform:uppercase;font-family:inherit}
+.lcard button:active{transform:translate(2px,2px);box-shadow:2px 2px 0 #450a0a}
 .lcard button:disabled{opacity:.6}
 .lmsg{margin-top:14px;font-size:13px;font-weight:700;padding:10px;border-radius:10px}
 .lmsg.err{color:#991b1b;background:#fee2e2;border:2px solid #991b1b}
 .lmsg.ok{color:#166534;background:#dcfce7;border:2px solid #166534}
+<style>
 #appScreen{display:none;padding-bottom:120px}
-.header{background:#dc2626;border-bottom:4px solid #1a1a1a;padding:16px 18px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:50;box-shadow:0 4px 0 #1a1a1a}
-.header .menu-btn{width:42px;height:42px;background:#fff;border:3px solid #1a1a1a;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;box-shadow:3px 3px 0 #1a1a1a;font-weight:900;cursor:pointer}
-.header .title{flex:1;text-align:center;font-family:'Archivo Black',sans-serif;font-size:20px;color:#fff;letter-spacing:1px;text-shadow:2px 2px 0 #1a1a1a}
+.header{background:#b91c1c;border-bottom:4px solid #450a0a;padding:16px 18px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:50;box-shadow:0 4px 0 #450a0a}
+.header .menu-btn{width:42px;height:42px;background:#fff;border:3px solid #450a0a;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;box-shadow:3px 3px 0 #450a0a;font-weight:900;cursor:pointer;color:#450a0a}
+.header .title{flex:1;text-align:center;font-family:'Archivo Black',sans-serif;font-size:20px;color:#fff;letter-spacing:1px;text-shadow:2px 2px 0 #450a0a}
 .header .icons{display:flex;gap:8px}
-.header .icons .ico{width:42px;height:42px;background:#fff;border:3px solid #1a1a1a;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:18px;box-shadow:3px 3px 0 #1a1a1a;cursor:pointer}
-.container{padding:20px 18px;max-width:520px;margin:0 auto}
-.dash{background:#fff;border:3px solid #1a1a1a;border-radius:18px;padding:18px;box-shadow:5px 5px 0 #1a1a1a;margin-bottom:18px}
-.dash-top{display:flex;align-items:center;gap:14px}
-.dash-avatar{width:56px;height:56px;border-radius:50%;background:#dc2626;border:3px solid #1a1a1a;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:900;color:#fff;box-shadow:3px 3px 0 #1a1a1a;flex-shrink:0;position:relative;cursor:pointer;overflow:visible}
-.dash-avatar img{width:100%;height:100%;border-radius:50%;object-fit:cover}
-.dash-avatar .cam{position:absolute;bottom:-4px;right:-4px;width:24px;height:24px;background:#fbbf24;border:2px solid #1a1a1a;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px}
-.dash-name{font-family:'Archivo Black',sans-serif;font-size:16px;text-transform:uppercase}
-.dash-role{font-size:12px;font-weight:800;margin-top:2px}
+.header .icons .ico{width:42px;height:42px;background:#fff;border:3px solid #450a0a;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:18px;box-shadow:3px 3px 0 #450a0a;cursor:pointer;color:#450a0a}
+</style>
+<style>
+#appScreen{display:none;padding-bottom:120px}
+.header{background:#b91c1c;border-bottom:4px solid #450a0a;padding:16px 18px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:50;box-shadow:0 4px 0 #450a0a}
+.header .menu-btn{width:42px;height:42px;background:#fff;border:3px solid #450a0a;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;box-shadow:3px 3px 0 #450a0a;font-weight:900;cursor:pointer;color:#450a0a}
+.header .title{flex:1;text-align:center;font-family:'Archivo Black',sans-serif;font-size:20px;color:#fff;letter-spacing:1px;text-shadow:2px 2px 0 #450a0a}
+.header .icons{display:flex;gap:8px}
+.header .icons .ico{width:42px;height:42px;background:#fff;border:3px solid #450a0a;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:18px;box-shadow:3px 3px 0 #450a0a;cursor:pointer;color:#450a0a}
+</style>
+<style>
 .dash-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
-.dash-box{background:#fdf6e3;border:3px solid #1a1a1a;border-radius:12px;padding:10px}
-.dash-box .l{font-size:10px;color:#666;font-weight:800;text-transform:uppercase}
-.dash-box .v{font-size:13px;font-weight:800;margin-top:2px}
+.dash-box{background:#fef2f2;border:3px solid #450a0a;border-radius:12px;padding:10px}
+.dash-box .l{font-size:10px;color:#991b1b;font-weight:800;text-transform:uppercase}
+.dash-box .v{font-size:13px;font-weight:800;margin-top:2px;color:#450a0a}
 .dash-warn{margin-top:10px;padding:10px;border-radius:10px;font-size:12px;font-weight:800;display:none}
 .sec-head{margin-bottom:14px}
 .sec-head .top{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
-.sec-head h1{font-family:'Archivo Black',sans-serif;font-size:20px;text-transform:uppercase;text-decoration:underline;text-decoration-thickness:3px;text-underline-offset:6px}
-.sec-head .badge{background:#fbbf24;border:3px solid #1a1a1a;border-radius:10px;padding:6px 12px;font-weight:800;font-size:11px;box-shadow:3px 3px 0 #1a1a1a}
-.sec-head p{font-size:12px;color:#555;margin-top:6px;font-weight:600}
+.sec-head h1{font-family:'Archivo Black',sans-serif;font-size:20px;text-transform:uppercase;text-decoration:underline;text-decoration-thickness:3px;text-underline-offset:6px;color:#fff}
+.sec-head .badge{background:#fbbf24;border:3px solid #450a0a;border-radius:10px;padding:6px 12px;font-weight:800;font-size:11px;box-shadow:3px 3px 0 #450a0a;color:#450a0a}
+.sec-head p{font-size:12px;color:#fecaca;margin-top:6px;font-weight:600}
+</style>
+<style>
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.card{background:#fff;border:3px solid #1a1a1a;border-radius:18px;padding:16px 14px;box-shadow:5px 5px 0 #1a1a1a;cursor:pointer;position:relative;overflow:hidden;min-height:160px;display:flex;flex-direction:column}
-.card:active{transform:translate(2px,2px);box-shadow:3px 3px 0 #1a1a1a}
+.card{background:#fff;border:3px solid #450a0a;border-radius:18px;padding:16px 14px;box-shadow:5px 5px 0 #450a0a;cursor:pointer;position:relative;overflow:hidden;min-height:160px;display:flex;flex-direction:column;color:#450a0a}
+.card:active{transform:translate(2px,2px);box-shadow:3px 3px 0 #450a0a}
 .card .top-strip{position:absolute;top:0;left:0;width:100%;height:8px}
-.card .ic-wrap{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:26px;border:3px solid #1a1a1a;box-shadow:3px 3px 0 #1a1a1a;margin:12px 0 14px}
-.card h3{font-family:'Archivo Black',sans-serif;font-size:15px;text-transform:uppercase;margin-bottom:4px;line-height:1.2}
-.card p{font-size:11px;color:#555;font-weight:600;line-height:1.4}
+.card .ic-wrap{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:26px;border:3px solid #450a0a;box-shadow:3px 3px 0 #450a0a;margin:12px 0 14px}
+.card h3{font-family:'Archivo Black',sans-serif;font-size:15px;text-transform:uppercase;margin-bottom:4px;line-height:1.2;color:#450a0a}
+.card p{font-size:11px;color:#991b1b;font-weight:600;line-height:1.4}
 .card .char{position:absolute;top:8px;right:8px;font-size:34px;transform:rotate(-10deg)}
 .strip-red{background:#dc2626}.strip-green{background:#16a34a}.strip-blue{background:#2563eb}.strip-yellow{background:#fbbf24}.strip-teal{background:#0d9488}.strip-purple{background:#7c3aed}
-.bottom-nav{position:fixed;bottom:0;left:0;right:0;background:#fdf6e3;border-top:4px solid #1a1a1a;display:flex;padding:10px 4px 14px;z-index:100;justify-content:space-around;align-items:flex-end;overflow-x:auto}
-.nav-item{flex:1;min-width:56px;text-align:center;font-size:9px;font-weight:800;cursor:pointer;color:#1a1a1a;padding:6px 2px}
-.nav-item .ico{display:flex;align-items:center;justify-content:center;width:42px;height:42px;background:#fff;border:3px solid #1a1a1a;border-radius:12px;font-size:18px;margin:0 auto 6px;box-shadow:3px 3px 0 #1a1a1a}
+</style>
+<style>
+.bottom-nav{position:fixed;bottom:0;left:0;right:0;background:#7f1d1d;border-top:4px solid #450a0a;display:flex;padding:10px 4px 14px;z-index:100;justify-content:space-around;align-items:flex-end;overflow-x:auto}
+.nav-item{flex:1;min-width:56px;text-align:center;font-size:9px;font-weight:800;cursor:pointer;color:#fff;padding:6px 2px}
+.nav-item .ico{display:flex;align-items:center;justify-content:center;width:42px;height:42px;background:#fff;border:3px solid #450a0a;border-radius:12px;font-size:18px;margin:0 auto 6px;box-shadow:3px 3px 0 #450a0a}
 .nav-item.active .ico{background:#fbbf24}
 </style>
-</head>
-<body>
 <style>
-.modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:999;padding:20px;overflow-y:auto}
+.modal-bg{display:none;position:fixed;inset:0;background:rgba(69,10,10,.7);z-index:999;padding:20px;overflow-y:auto}
 .modal-bg.show{display:block}
-.modal{background:#fff;border:4px solid #1a1a1a;border-radius:22px;padding:20px;max-width:440px;margin:40px auto;box-shadow:8px 8px 0 #1a1a1a}
-.modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;padding-bottom:12px;border-bottom:3px solid #1a1a1a}
-.modal-head h2{font-family:'Archivo Black',sans-serif;font-size:15px;text-transform:uppercase}
-.modal-close{width:36px;height:36px;background:#fecaca;border:3px solid #1a1a1a;border-radius:10px;font-weight:900;cursor:pointer;box-shadow:3px 3px 0 #1a1a1a;font-size:16px}
+.modal{background:#fff;border:4px solid #450a0a;border-radius:22px;padding:20px;max-width:440px;margin:40px auto;box-shadow:8px 8px 0 #450a0a;color:#450a0a}
+.modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;padding-bottom:12px;border-bottom:3px solid #450a0a}
+.modal-head h2{font-family:'Archivo Black',sans-serif;font-size:15px;text-transform:uppercase;color:#450a0a}
+.modal-close{width:36px;height:36px;background:#fecaca;border:3px solid #450a0a;border-radius:10px;font-weight:900;cursor:pointer;box-shadow:3px 3px 0 #450a0a;font-size:16px;color:#450a0a}
 .modal-list{display:flex;flex-direction:column;gap:10px}
-.mitem{display:flex;align-items:center;gap:12px;background:#fdf6e3;border:3px solid #1a1a1a;border-radius:14px;padding:12px 14px;cursor:pointer;box-shadow:3px 3px 0 #1a1a1a}
-.mitem:active{transform:translate(2px,2px);box-shadow:1px 1px 0 #1a1a1a}
-.mitem .mi{width:38px;height:38px;background:#fff;border:2px solid #1a1a1a;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.mitem{display:flex;align-items:center;gap:12px;background:#fef2f2;border:3px solid #450a0a;border-radius:14px;padding:12px 14px;cursor:pointer;box-shadow:3px 3px 0 #450a0a}
+.mitem:active{transform:translate(2px,2px);box-shadow:1px 1px 0 #450a0a}
+.mitem .mi{width:38px;height:38px;background:#fff;border:2px solid #450a0a;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
 .mitem .mt{flex:1}
-.mitem .mt b{font-size:13px;font-weight:800;display:block}
-.mitem .mt span{font-size:10px;color:#666;font-weight:600}
-.mitem .ar{font-size:16px;font-weight:900}
-.modal label{display:block;font-size:12px;font-weight:800;margin:12px 0 6px;text-transform:uppercase}
-.modal input,.modal textarea{width:100%;padding:12px;background:#fdf6e3;border:3px solid #1a1a1a;border-radius:12px;font-size:14px;outline:none;font-family:inherit;font-weight:600}
-.modal button.aksi{width:100%;padding:14px;background:#fbbf24;color:#1a1a1a;border:3px solid #1a1a1a;border-radius:12px;font-size:14px;font-weight:800;cursor:pointer;box-shadow:4px 4px 0 #1a1a1a;margin-top:14px;text-transform:uppercase;font-family:inherit}
-.modal button.aksi:active{transform:translate(2px,2px);box-shadow:2px 2px 0 #1a1a1a}
-.hasil{margin-top:14px;display:none;padding:14px;background:#fdf6e3;border:3px solid #1a1a1a;border-radius:12px;font-size:13px;font-weight:600;line-height:1.6;word-break:break-word}
-.hasil img{width:100%;border-radius:8px;margin-top:8px;border:2px solid #1a1a1a}
-.hasil a.dl{display:block;padding:10px;background:#fbbf24;color:#1a1a1a;text-decoration:none;border:3px solid #1a1a1a;border-radius:10px;text-align:center;font-weight:800;margin-top:10px;font-size:12px;box-shadow:3px 3px 0 #1a1a1a;text-transform:uppercase}
-.box{background:#fff;padding:10px;border-radius:8px;margin:6px 0;border:2px solid #1a1a1a}
-.box .l{font-size:10px;color:#666;text-transform:uppercase;font-weight:800}
-.box .v{font-size:14px;font-weight:800;word-break:break-all;margin-top:2px}
-.loading{text-align:center;font-weight:800;display:none;margin-top:12px;font-size:13px}
-.sidebar{position:fixed;top:0;left:-100%;width:290px;height:100vh;background:#fff;border-right:4px solid #1a1a1a;z-index:1000;transition:left .3s ease;overflow-y:auto}
+.mitem .mt b{font-size:13px;font-weight:800;display:block;color:#450a0a}
+.mitem .mt span{font-size:10px;color:#991b1b;font-weight:600}
+.mitem .ar{font-size:16px;font-weight:900;color:#450a0a}
+</style>
+<style>
+.modal label{display:block;font-size:12px;font-weight:800;margin:12px 0 6px;text-transform:uppercase;color:#450a0a}
+.modal input,.modal textarea{width:100%;padding:12px;background:#fef2f2;border:3px solid #450a0a;border-radius:12px;font-size:14px;outline:none;font-family:inherit;font-weight:600;color:#450a0a}
+.modal button.aksi{width:100%;padding:14px;background:#fbbf24;color:#450a0a;border:3px solid #450a0a;border-radius:12px;font-size:14px;font-weight:800;cursor:pointer;box-shadow:4px 4px 0 #450a0a;margin-top:14px;text-transform:uppercase;font-family:inherit}
+.modal button.aksi:active{transform:translate(2px,2px);box-shadow:2px 2px 0 #450a0a}
+.hasil{margin-top:14px;display:none;padding:14px;background:#fef2f2;border:3px solid #450a0a;border-radius:12px;font-size:13px;font-weight:600;line-height:1.6;word-break:break-word;color:#450a0a}
+.hasil img{width:100%;border-radius:8px;margin-top:8px;border:2px solid #450a0a}
+.hasil a.dl{display:block;padding:10px;background:#fbbf24;color:#450a0a;text-decoration:none;border:3px solid #450a0a;border-radius:10px;text-align:center;font-weight:800;margin-top:10px;font-size:12px;box-shadow:3px 3px 0 #450a0a;text-transform:uppercase}
+.box{background:#fff;padding:10px;border-radius:8px;margin:6px 0;border:2px solid #450a0a}
+.box .l{font-size:10px;color:#991b1b;text-transform:uppercase;font-weight:800}
+.box .v{font-size:14px;font-weight:800;word-break:break-all;margin-top:2px;color:#450a0a}
+.loading{text-align:center;font-weight:800;display:none;margin-top:12px;font-size:13px;color:#450a0a}
+</style>
+<style>
+.sidebar{position:fixed;top:0;left:-100%;width:290px;height:100vh;background:#fff;border-right:4px solid #450a0a;z-index:1000;transition:left .3s ease;overflow-y:auto}
 .sidebar.show{left:0}
-.sb-head{background:#dc2626;border-bottom:4px solid #1a1a1a;padding:16px 18px;display:flex;align-items:center;justify-content:space-between}
-.sb-head h3{font-family:'Archivo Black',sans-serif;font-size:15px;color:#fff;text-transform:uppercase;text-shadow:2px 2px 0 #1a1a1a}
-.sb-close{width:32px;height:32px;background:#fff;border:3px solid #1a1a1a;border-radius:8px;font-weight:900;cursor:pointer;font-size:14px}
+.sb-head{background:#b91c1c;border-bottom:4px solid #450a0a;padding:16px 18px;display:flex;align-items:center;justify-content:space-between}
+.sb-head h3{font-family:'Archivo Black',sans-serif;font-size:15px;color:#fff;text-transform:uppercase;text-shadow:2px 2px 0 #450a0a}
+.sb-close{width:32px;height:32px;background:#fff;border:3px solid #450a0a;border-radius:8px;font-weight:900;cursor:pointer;font-size:14px;color:#450a0a}
 .sb-body{padding:14px}
-.sb-user{background:#fdf6e3;border:3px solid #1a1a1a;border-radius:12px;padding:10px 12px;margin-bottom:10px}
+.sb-user{background:#fef2f2;border:3px solid #450a0a;border-radius:12px;padding:10px 12px;margin-bottom:10px;color:#450a0a}
 .sb-user .top{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
 .sb-user .nm{font-weight:800;font-size:13px}
-.sb-user .rl{font-size:10px;font-weight:800;padding:2px 8px;border-radius:10px;border:2px solid #1a1a1a;color:#fff}
-.sb-user .row{font-size:11px;font-weight:700;color:#444;margin-top:3px}
-.sb-user .row b{color:#1a1a1a}
-.sb-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:999}
+.sb-user .rl{font-size:10px;font-weight:800;padding:2px 8px;border-radius:10px;border:2px solid #450a0a;color:#fff}
+.sb-user .row{font-size:11px;font-weight:700;color:#7f1d1d;margin-top:3px}
+.sb-user .row b{color:#450a0a}
+.sb-overlay{display:none;position:fixed;inset:0;background:rgba(69,10,10,.6);z-index:999}
 .sb-overlay.show{display:block}
-.sb-empty{text-align:center;padding:30px;color:#888;font-weight:700;font-size:13px}
+.sb-empty{text-align:center;padding:30px;color:#991b1b;font-weight:700;font-size:13px}
 .sb-actions{display:flex;gap:6px;margin-top:8px}
-.sb-btn{flex:1;padding:8px;border:2px solid #1a1a1a;border-radius:8px;font-size:11px;font-weight:800;cursor:pointer;text-transform:uppercase;box-shadow:2px 2px 0 #1a1a1a}
-.sb-btn.edit{background:#fbbf24;color:#1a1a1a}
+.sb-btn{flex:1;padding:8px;border:2px solid #450a0a;border-radius:8px;font-size:11px;font-weight:800;cursor:pointer;text-transform:uppercase;box-shadow:2px 2px 0 #450a0a}
+.sb-btn.edit{background:#fbbf24;color:#450a0a}
 .sb-btn.del{background:#dc2626;color:#fff}
-.sb-btn:active{transform:translate(1px,1px);box-shadow:1px 1px 0 #1a1a1a}
-.sb-add{width:100%;padding:12px;background:#16a34a;color:#fff;border:3px solid #1a1a1a;border-radius:12px;font-size:13px;font-weight:800;cursor:pointer;box-shadow:3px 3px 0 #1a1a1a;text-transform:uppercase;margin-bottom:12px;font-family:inherit}
-.edit-form{background:#fff;border:3px solid #1a1a1a;border-radius:12px;padding:12px;margin-top:8px;display:none}
+.sb-btn:active{transform:translate(1px,1px);box-shadow:1px 1px 0 #450a0a}
+.sb-add{width:100%;padding:12px;background:#16a34a;color:#fff;border:3px solid #450a0a;border-radius:12px;font-size:13px;font-weight:800;cursor:pointer;box-shadow:3px 3px 0 #450a0a;text-transform:uppercase;margin-bottom:12px;font-family:inherit}
+.edit-form{background:#fff;border:3px solid #450a0a;border-radius:12px;padding:12px;margin-top:8px;display:none}
 .edit-form.show{display:block}
-.edit-form label{display:block;font-size:11px;font-weight:800;margin:6px 0 4px;text-transform:uppercase}
-.edit-form input,.edit-form select{width:100%;padding:8px;border:2px solid #1a1a1a;border-radius:8px;font-size:12px;font-weight:600;background:#fdf6e3;font-family:inherit;outline:none}
+.edit-form label{display:block;font-size:11px;font-weight:800;margin:6px 0 4px;text-transform:uppercase;color:#450a0a}
+.edit-form input,.edit-form select{width:100%;padding:8px;border:2px solid #450a0a;border-radius:8px;font-size:12px;font-weight:600;background:#fef2f2;font-family:inherit;outline:none;color:#450a0a}
 .edit-form .btns{display:flex;gap:6px;margin-top:10px}
-.edit-form .btns button{flex:1;padding:8px;border:2px solid #1a1a1a;border-radius:8px;font-size:11px;font-weight:800;cursor:pointer;text-transform:uppercase;box-shadow:2px 2px 0 #1a1a1a}
+.edit-form .btns button{flex:1;padding:8px;border:2px solid #450a0a;border-radius:8px;font-size:11px;font-weight:800;cursor:pointer;text-transform:uppercase;box-shadow:2px 2px 0 #450a0a}
 .btn-save{background:#16a34a;color:#fff}
 .btn-cancel{background:#666;color:#fff}
-.edit-foto{display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:1001;padding:20px;overflow-y:auto}
+</style>
+<style>
+.edit-foto{display:none;position:fixed;inset:0;background:rgba(69,10,10,.85);z-index:1001;padding:20px;overflow-y:auto}
 .edit-foto.show{display:block}
-.edit-foto-box{background:#fff;border:4px solid #1a1a1a;border-radius:20px;padding:20px;max-width:360px;margin:40px auto;box-shadow:8px 8px 0 #1a1a1a;text-align:center}
+.edit-foto-box{background:#fff;border:4px solid #450a0a;border-radius:20px;padding:20px;max-width:360px;margin:40px auto;box-shadow:8px 8px 0 #450a0a;text-align:center;color:#450a0a}
 .edit-foto-box h3{font-family:'Archivo Black',sans-serif;font-size:16px;margin-bottom:14px;text-transform:uppercase}
-.edit-foto-box .preview{width:120px;height:120px;border-radius:50%;border:4px solid #1a1a1a;margin:0 auto 14px;display:flex;align-items:center;justify-content:center;font-size:48px;font-weight:900;color:#fff;background:#dc2626;overflow:hidden}
+.edit-foto-box .preview{width:120px;height:120px;border-radius:50%;border:4px solid #450a0a;margin:0 auto 14px;display:flex;align-items:center;justify-content:center;font-size:48px;font-weight:900;color:#fff;background:#dc2626;overflow:hidden}
 .edit-foto-box .preview img{width:100%;height:100%;object-fit:cover}
 .edit-foto-box input[type=file]{display:none}
-.edit-foto-box .btn-upload{display:inline-block;padding:10px 20px;background:#fbbf24;color:#1a1a1a;border:3px solid #1a1a1a;border-radius:10px;font-size:13px;font-weight:800;cursor:pointer;box-shadow:3px 3px 0 #1a1a1a;margin:6px 0;text-transform:uppercase}
-.edit-foto-box .btn-save{width:100%;padding:12px;background:#16a34a;color:#fff;border:3px solid #1a1a1a;border-radius:10px;font-size:14px;font-weight:800;cursor:pointer;box-shadow:3px 3px 0 #1a1a1a;margin-top:12px;text-transform:uppercase;font-family:inherit}
-.edit-foto-box .btn-hapus{width:100%;padding:10px;background:#dc2626;color:#fff;border:3px solid #1a1a1a;border-radius:10px;font-size:13px;font-weight:800;cursor:pointer;box-shadow:3px 3px 0 #1a1a1a;margin-top:8px;text-transform:uppercase;font-family:inherit}
-.edit-foto-box .btn-batal{width:100%;padding:10px;background:#666;color:#fff;border:3px solid #1a1a1a;border-radius:10px;font-size:13px;font-weight:800;cursor:pointer;box-shadow:3px 3px 0 #1a1a1a;margin-top:8px;text-transform:uppercase;font-family:inherit}
+.edit-foto-box .btn-upload{display:inline-block;padding:10px 20px;background:#fbbf24;color:#450a0a;border:3px solid #450a0a;border-radius:10px;font-size:13px;font-weight:800;cursor:pointer;box-shadow:3px 3px 0 #450a0a;margin:6px 0;text-transform:uppercase}
+.edit-foto-box .btn-save{width:100%;padding:12px;background:#16a34a;color:#fff;border:3px solid #450a0a;border-radius:10px;font-size:14px;font-weight:800;cursor:pointer;box-shadow:3px 3px 0 #450a0a;margin-top:12px;text-transform:uppercase;font-family:inherit}
+.edit-foto-box .btn-hapus{width:100%;padding:10px;background:#dc2626;color:#fff;border:3px solid #450a0a;border-radius:10px;font-size:13px;font-weight:800;cursor:pointer;box-shadow:3px 3px 0 #450a0a;margin-top:8px;text-transform:uppercase;font-family:inherit}
+.edit-foto-box .btn-batal{width:100%;padding:10px;background:#666;color:#fff;border:3px solid #450a0a;border-radius:10px;font-size:13px;font-weight:800;cursor:pointer;box-shadow:3px 3px 0 #450a0a;margin-top:8px;text-transform:uppercase;font-family:inherit}
 </style>
 </head>
 <body>
-
 <div class="sb-overlay" id="sbOverlay" onclick="closeSb()"></div>
 <div class="sidebar" id="sidebar">
   <div class="sb-head">
@@ -153,11 +163,10 @@ body{background:#fdf6e3;background-image:radial-gradient(#e8d9b0 1px,transparent
     <div class="lmsg" id="loginMsg"></div>
   </div>
 </div>
-
 <div id="appScreen">
   <div class="header">
     <div class="menu-btn" onclick="openSb()">☰</div>
-    <div class="title">AZKA PANEL</div>
+  <div class="title">AZKA PANEL</div>
     <div class="icons">
       <div class="ico" onclick="doLogout()">🚪</div>
       <div class="ico" id="userIco">👤</div>
@@ -181,8 +190,7 @@ body{background:#fdf6e3;background-image:radial-gradient(#e8d9b0 1px,transparent
       </div>
       <div class="dash-warn" id="dashWarn"></div>
     </div>
-
-    <div class="sec-head">
+        <div class="sec-head">
       <div class="top">
         <h1>Kategori Menu</h1>
         <div class="badge" id="totalMod">0 MODULES</div>
@@ -223,7 +231,6 @@ body{background:#fdf6e3;background-image:radial-gradient(#e8d9b0 1px,transparent
     <button class="btn-batal" onclick="closeEditFoto()">Batal</button>
   </div>
 </div>
-
 <script>
 var API_KEY='PREMIUM03DYWHDHWHFHAJXSJFHAJS';
 var USERS=[];
@@ -231,7 +238,7 @@ var AKTIF='all';
 
 async function loadUsers(){
   try{
-    var r=await fetch('users.json?t='+Date.now());
+  var r=await fetch('users.json?t='+Date.now());
     var j=await r.json();
     USERS=j.users||[];
   }catch(e){
@@ -283,7 +290,8 @@ function showApp(){
   updateAvatar();
   render();
 }
-
+</script>
+<script>
 function renderDashboard(u){
   var user=USERS.find(function(x){return x.nama.toLowerCase()===u.nama.toLowerCase();});
   var role=u.role||'user';
@@ -331,8 +339,8 @@ function filterKat(id,el){
   el.classList.add('active');
   render();
 }
-
-// ===== FOTO PROFIL =====
+</script>
+<script>
 var tempFoto=null;
 
 function openEditFoto(){
@@ -401,8 +409,8 @@ function updateAvatar(){
   cam.innerText='📷';
   av.appendChild(cam);
 }
-
-// ===== SIDEBAR =====
+</script>
+<script>
 function openSb(){
   var u=JSON.parse(localStorage.getItem('azka_user')||'{}');
   var role=u.role||'user';
@@ -441,7 +449,6 @@ function renderSb(){
     h+='</div>';
   }
   USERS.forEach(function(x, idx){
-    // Developer bisa liat semua. Owner gak bisa liat developer.
     var bisaLiatPw = (role === 'developer') || (role === 'owner' && x.role !== 'developer');
     var roleColor={'developer':'#8b5cf6','owner':'#dc2626','admin':'#f59e0b','moderator':'#3b82f6','vip':'#ec4899','reseller':'#16a34a','user':'#666'};
     h+='<div class="sb-user">';
@@ -473,7 +480,8 @@ function renderSb(){
   });
   body.innerHTML=h;
 }
-
+</script>
+<script>
 function showAddForm(){document.getElementById('addForm').classList.add('show');}
 function hideAddForm(){document.getElementById('addForm').classList.remove('show');}
 function showEditForm(i){document.getElementById('editForm'+i).classList.add('show');}
@@ -519,6 +527,7 @@ function delUser(i){
   copyToClipboard(JSON.stringify({users:USERS},null,2));
   alert('🗑️ User '+nm+' dihapus!\n\n📋 users.json dicopy ke clipboard!');
 }
+
 var KATEGORI=[
 {id:'downloader',strip:'strip-red',ic:'📥',color:'#dc2626',title:'DOWNLOADER',desc:'Download video & audio',char:'📥',items:[
 {n:'TikTok DL',d:'Download video TikTok',i:'🎵',act:'tiktok'},
@@ -552,7 +561,8 @@ var KATEGORI=[
 {n:'Canva Musik',d:'Bikin IP musik',i:'🎵',act:'musicip'},
 {n:'Random Quote',d:'Quote motivasi random',i:'💭',act:'quotes'}]}
 ];
-
+</script>
+<script>
 function render(){
   var g=document.getElementById('grid');
   g.innerHTML='';
@@ -585,9 +595,9 @@ function openKat(id){
   document.getElementById('modalBg').classList.add('show');
 }
 
-var INP='style="width:100%;padding:12px;border:3px solid #1a1a1a;border-radius:12px;background:#fdf6e3;font-size:14px;outline:none;font-weight:600"';
-var LBL='style="display:block;font-size:12px;font-weight:800;margin:12px 0 6px;text-transform:uppercase"';
-var BTN='style="width:100%;padding:14px;background:#fbbf24;color:#1a1a1a;border:3px solid #1a1a1a;border-radius:12px;font-size:14px;font-weight:800;cursor:pointer;box-shadow:4px 4px 0 #1a1a1a;margin-top:14px;text-transform:uppercase"';
+var INP='style="width:100%;padding:12px;border:3px solid #450a0a;border-radius:12px;background:#fef2f2;font-size:14px;outline:none;font-weight:600;color:#450a0a"';
+var LBL='style="display:block;font-size:12px;font-weight:800;margin:12px 0 6px;text-transform:uppercase;color:#450a0a"';
+var BTN='style="width:100%;padding:14px;background:#fbbf24;color:#450a0a;border:3px solid #450a0a;border-radius:12px;font-size:14px;font-weight:800;cursor:pointer;box-shadow:4px 4px 0 #450a0a;margin-top:14px;text-transform:uppercase"';
 
 function openTool(act,title){
   document.getElementById('modalTitle').innerText=title;
@@ -606,16 +616,16 @@ function openTool(act,title){
   else if(act==='nanobanana')h='<label '+LBL+'>Link Gambar</label><input id="f1" type="text" placeholder="https://...jpg" '+INP+'><label '+LBL+'>Prompt</label><input id="f2" type="text" placeholder="Hilangkan bintangnya" '+INP+'><button '+BTN+' onclick="runNanoBanana()">Edit</button>';
   else if(act==='animetoreal')h='<label '+LBL+'>Link Gambar Anime</label><input id="f1" type="text" placeholder="https://...jpg" '+INP+'><button '+BTN+' onclick="runAnimeToReal()">Ubah</button>';
   else if(act==='musicip')h='<label '+LBL+'>Link Foto</label><input id="f1" type="text" placeholder="https://...jpg" '+INP+'><label '+LBL+'>Nama</label><input id="f2" type="text" placeholder="Nama kamu" '+INP+'><button '+BTN+' onclick="runMusicIP()">Bikin</button>';
-  else if(act==='quotes')h='<p style="text-align:center;font-size:13px;color:#666;font-weight:600;margin-bottom:10px">Klik tombol buat dapetin quote random</p><button '+BTN+' onclick="runQuotes()">🎲 Random Quote</button>';
-  else if(act==='kisahnabi')h='<label '+LBL+'>Nama Nabi</label><input id="f1" type="text" placeholder="muhammad" '+INP+'><p style="font-size:11px;color:#666;font-weight:600;margin-top:6px">Contoh: muhammad, isa, musa, adam, nuh, ibrahim</p><button '+BTN+' onclick="runKisahNabi()">Cari</button>';
+  else if(act==='quotes')h='<p style="text-align:center;font-size:13px;color:#991b1b;font-weight:600;margin-bottom:10px">Klik tombol buat dapetin quote random</p><button '+BTN+' onclick="runQuotes()">🎲 Random Quote</button>';
+  else if(act==='kisahnabi')h='<label '+LBL+'>Nama Nabi</label><input id="f1" type="text" placeholder="muhammad" '+INP+'><p style="font-size:11px;color:#991b1b;font-weight:600;margin-top:6px">Contoh: muhammad, isa, musa, adam, nuh, ibrahim</p><button '+BTN+' onclick="runKisahNabi()">Cari</button>';
   else if(act==='sholat')h='<label '+LBL+'>Kota</label><input id="f1" type="text" placeholder="Jakarta" '+INP+'><button '+BTN+' onclick="runSholat()">Lihat Jadwal</button>';
-  else if(act==='quransurat')h='<p style="text-align:center;font-size:13px;color:#666;font-weight:600;margin-bottom:10px">Daftar 114 surat Al-Quran</p><button '+BTN+' onclick="runQuranSurat()">📚 Tampilkan Surat</button>';
+  else if(act==='quransurat')h='<p style="text-align:center;font-size:13px;color:#991b1b;font-weight:600;margin-bottom:10px">Daftar 114 surat Al-Quran</p><button '+BTN+' onclick="runQuranSurat()">📚 Tampilkan Surat</button>';
   else if(act==='quranayat')h='<label '+LBL+'>Nomor Surat (1-114)</label><input id="f1" type="text" placeholder="1" '+INP+'><button '+BTN+' onclick="runQuranAyat()">Lihat Info</button>';
   else if(act==='qr')h='<label '+LBL+'>Text</label><input id="f1" type="text" '+INP+'><label '+LBL+'>Size</label><input id="f2" type="text" value="400" '+INP+'><button '+BTN+' onclick="runQR()">Buat</button>';
   else if(act==='pw')h='<label '+LBL+'>Panjang</label><input id="f1" type="text" value="12" '+INP+'><button '+BTN+' onclick="runPW()">Generate</button>';
   else if(act==='otp')h='<label '+LBL+'>Panjang OTP</label><input id="f1" type="text" value="6" '+INP+'><button '+BTN+' onclick="runOTP()">Generate</button>';
   else if(act==='gemini'||act==='cici'||act==='apertus'||act==='unliai')h='<label '+LBL+'>Pertanyaan</label><textarea id="f1" rows="3" placeholder="Tanya apa aja..." '+INP+'></textarea><button '+BTN+' onclick="runAI(\''+act+'\')">Kirim</button>';
-  else h='<p style="font-size:13px;color:#666;font-weight:600;padding:20px 0;text-align:center">Fitur belum tersedia.</p>';
+  else h='<p style="font-size:13px;color:#991b1b;font-weight:600;padding:20px 0;text-align:center">Fitur belum tersedia.</p>';
   h+='<div class="hasil" id="hasil"></div><div class="loading" id="load">⏳ Loading...</div>';
   document.getElementById('modalBody').innerHTML=h;
 }
@@ -624,15 +634,17 @@ function setH(html){var h=document.getElementById('hasil');h.innerHTML=html;h.st
 function setL(b){document.getElementById('load').style.display=b?'block':'none';}
 function box(l,v){return '<div class="box"><div class="l">'+l+'</div><div class="v">'+v+'</div></div>';}
 function api(u){return 'https://hyerls.my.id/api/'+u+'?key='+API_KEY;}
-async function runQuotes(){setL(true);try{var r=await fetch(api('quotes.php'));var j=await r.json();setL(false);if(j.success){var h='<div style="padding:16px;background:#fff;border:3px solid #1a1a1a;border-radius:12px;box-shadow:4px 4px 0 #1a1a1a"><div style="font-size:32px;text-align:center;margin-bottom:8px">💭</div><div style="font-size:14px;font-weight:700;line-height:1.6;font-style:italic">"'+j.quote+'"</div><div style="margin-top:12px;font-size:12px;font-weight:800;color:#666;text-align:right">— '+j.author+'</div></div><button '+BTN+' onclick="runQuotes()">🔄 Quote Lagi</button>';setH(h);}else setH('<b>❌ Gagal</b>');}catch(e){setL(false);setH('<b>❌ '+e.message+'</b>');}}
+</script>
+<script>
+async function runQuotes(){setL(true);try{var r=await fetch(api('quotes.php'));var j=await r.json();setL(false);if(j.success){var h='<div style="padding:16px;background:#fff;border:3px solid #450a0a;border-radius:12px;box-shadow:4px 4px 0 #450a0a"><div style="font-size:32px;text-align:center;margin-bottom:8px">💭</div><div style="font-size:14px;font-weight:700;line-height:1.6;font-style:italic;color:#450a0a">"'+j.quote+'"</div><div style="margin-top:12px;font-size:12px;font-weight:800;color:#991b1b;text-align:right">— '+j.author+'</div></div><button '+BTN+' onclick="runQuotes()">🔄 Quote Lagi</button>';setH(h);}else setH('<b>❌ Gagal</b>');}catch(e){setL(false);setH('<b>❌ '+e.message+'</b>');}}
 
 async function runKisahNabi(){var nabi=document.getElementById('f1').value.trim().toLowerCase();if(!nabi)return alert('Isi!');setL(true);try{var r=await fetch(api('kisahnabi.php')+'&nabi='+encodeURIComponent(nabi));var raw=await r.text();setL(false);var j;try{j=JSON.parse(raw);}catch(e){}if(j&&j.success){var h='<b>📖 '+(j.nabi||nabi)+'</b>';if(j.tahun_kelahiran)h+=box('Tahun Kelahiran',j.tahun_kelahiran);if(j.tempat)h+=box('Tempat',j.tempat);if(j.umur)h+=box('Umur',j.umur);if(j.deskripsi)h+='<div style="margin-top:10px;line-height:1.7;font-size:13px">'+j.deskripsi+'</div>';if(j.kisah)h+='<div style="margin-top:10px;line-height:1.7;font-size:13px">'+j.kisah+'</div>';if(!j.kisah&&!j.deskripsi)h+='<pre style="font-size:10px;white-space:pre-wrap">'+raw+'</pre>';setH(h);}else setH('<b>❌ Nabi gak ditemukan</b><pre style="font-size:10px;white-space:pre-wrap">'+raw+'</pre>');}catch(e){setL(false);setH('<b>❌ '+e.message+'</b>');}}
 
-async function runSholat(){var kota=document.getElementById('f1').value.trim();if(!kota)return alert('Isi!');setL(true);try{var r=await fetch(api('jadwalshalat.php')+'&kota='+encodeURIComponent(kota));var j=await r.json();setL(false);if(j.success){var d=j.data;var h='<b>🕌 '+d.lokasi+'</b>';h+='<div style="font-size:11px;color:#666;font-weight:700;margin-bottom:10px">'+d.tanggal_masehi+' · '+d.tanggal_hijriyah+'</div>';var jdw=d.jadwal;var list=[['Imsak',jdw.Imsak],['Subuh',jdw.Fajr],['Terbit',jdw.Sunrise],['Dzuhur',jdw.Dhuhr],['Ashar',jdw.Asr],['Maghrib',jdw.Maghrib],['Isya',jdw.Isha]];list.forEach(function(x){h+='<div style="display:flex;justify-content:space-between;padding:8px 10px;background:#fff;border:2px solid #1a1a1a;border-radius:8px;margin:6px 0;font-weight:700"><span>'+x[0]+'</span><span style="color:#16a34a">'+x[1]+'</span></div>';});setH(h);}else setH('<b>❌ Kota gak ditemukan</b>');}catch(e){setL(false);setH('<b>❌ '+e.message+'</b>');}}
+async function runSholat(){var kota=document.getElementById('f1').value.trim();if(!kota)return alert('Isi!');setL(true);try{var r=await fetch(api('jadwalshalat.php')+'&kota='+encodeURIComponent(kota));var j=await r.json();setL(false);if(j.success){var d=j.data;var h='<b>🕌 '+d.lokasi+'</b>';h+='<div style="font-size:11px;color:#991b1b;font-weight:700;margin-bottom:10px">'+d.tanggal_masehi+' · '+d.tanggal_hijriyah+'</div>';var jdw=d.jadwal;var list=[['Imsak',jdw.Imsak],['Subuh',jdw.Fajr],['Terbit',jdw.Sunrise],['Dzuhur',jdw.Dhuhr],['Ashar',jdw.Asr],['Maghrib',jdw.Maghrib],['Isya',jdw.Isha]];list.forEach(function(x){h+='<div style="display:flex;justify-content:space-between;padding:8px 10px;background:#fff;border:2px solid #450a0a;border-radius:8px;margin:6px 0;font-weight:700;color:#450a0a"><span>'+x[0]+'</span><span style="color:#16a34a">'+x[1]+'</span></div>';});setH(h);}else setH('<b>❌ Kota gak ditemukan</b>');}catch(e){setL(false);setH('<b>❌ '+e.message+'</b>');}}
 
-async function runQuranSurat(){setL(true);try{var r=await fetch(api('quransurat.php'));var raw=await r.text();setL(false);var j;try{j=JSON.parse(raw);}catch(e){}if(j&&j.success){var list=j.data||j.surat||j.result||[];var h='<b>📚 Daftar Surat</b>';list.forEach(function(s){var no=s.nomor||s.number||s.id||'';var nm=s.nama||s.name||s.latin||'';var ar2=s.arti||s.meaning||'';var ayt=s.ayat||s.verses||s.count||'';h+='<div style="padding:10px;background:#fff;border:2px solid #1a1a1a;border-radius:8px;margin:6px 0;font-weight:700"><span style="display:inline-block;width:30px">'+no+'.</span>'+nm+' <span style="font-size:11px;color:#666">('+ayt+' ayat)</span><div style="font-size:11px;color:#666;margin-top:2px">'+ar2+'</div></div>';});setH(h);}else setH('<b>❌ Gagal</b><pre style="font-size:10px;white-space:pre-wrap">'+raw.slice(0,300)+'</pre>');}catch(e){setL(false);setH('<b>❌ '+e.message+'</b>');}}
+async function runQuranSurat(){setL(true);try{var r=await fetch(api('quransurat.php'));var raw=await r.text();setL(false);var j;try{j=JSON.parse(raw);}catch(e){}if(j&&j.success){var list=j.data||j.surat||j.result||[];var h='<b>📚 Daftar Surat</b>';list.forEach(function(s){var no=s.nomor||s.number||s.id||'';var nm=s.nama||s.name||s.latin||'';var ar2=s.arti||s.meaning||'';var ayt=s.ayat||s.verses||s.count||'';h+='<div style="padding:10px;background:#fff;border:2px solid #450a0a;border-radius:8px;margin:6px 0;font-weight:700;color:#450a0a"><span style="display:inline-block;width:30px">'+no+'.</span>'+nm+' <span style="font-size:11px;color:#991b1b">('+ayt+' ayat)</span><div style="font-size:11px;color:#991b1b;margin-top:2px">'+ar2+'</div></div>';});setH(h);}else setH('<b>❌ Gagal</b><pre style="font-size:10px;white-space:pre-wrap">'+raw.slice(0,300)+'</pre>');}catch(e){setL(false);setH('<b>❌ '+e.message+'</b>');}}
 
-async function runQuranAyat(){var id=document.getElementById('f1').value.trim();if(!id)return alert('Isi!');setL(true);try{var r=await fetch(api('quranayat.php')+'&id='+id);var j=await r.json();setL(false);if(j.success&&j.data){var d=j.data;var h='<b>🕋 '+d.nama_latin+'</b>';h+='<div style="font-size:22px;text-align:right;line-height:1.6;margin:10px 0;color:#16a34a">'+d.nama_arab+'</div>';h+=box('Nomor Surat',d.nomor);h+=box('Arti',d.arti);h+=box('Tempat Turun',d.tempat_turun);h+=box('Jumlah Ayat',d.jumlah_ayat);if(d.deskripsi)h+='<div style="margin-top:12px;padding:12px;background:#fff;border:2px solid #1a1a1a;border-radius:8px;font-size:12px;line-height:1.7">'+d.deskripsi+'</div>';setH(h);}else setH('<b>❌ Surat gak ditemukan</b>');}catch(e){setL(false);setH('<b>❌ '+e.message+'</b>');}}
+async function runQuranAyat(){var id=document.getElementById('f1').value.trim();if(!id)return alert('Isi!');setL(true);try{var r=await fetch(api('quranayat.php')+'&id='+id);var j=await r.json();setL(false);if(j.success&&j.data){var d=j.data;var h='<b>🕋 '+d.nama_latin+'</b>';h+='<div style="font-size:22px;text-align:right;line-height:1.6;margin:10px 0;color:#16a34a">'+d.nama_arab+'</div>';h+=box('Nomor Surat',d.nomor);h+=box('Arti',d.arti);h+=box('Tempat Turun',d.tempat_turun);h+=box('Jumlah Ayat',d.jumlah_ayat);if(d.deskripsi)h+='<div style="margin-top:12px;padding:12px;background:#fff;border:2px solid #450a0a;border-radius:8px;font-size:12px;line-height:1.7;color:#450a0a">'+d.deskripsi+'</div>';setH(h);}else setH('<b>❌ Surat gak ditemukan</b>');}catch(e){setL(false);setH('<b>❌ '+e.message+'</b>');}}
 
 function runFC(){var a=document.getElementById('f1').value.trim(),b=document.getElementById('f2').value.trim(),c=document.getElementById('f3').value.trim();if(!a||!b||!c)return alert('Isi semua!');setH('<b>✅ Berhasil!</b><img src="'+api('fakecall.php')+'&imgUrl='+encodeURIComponent(a)+'&name='+encodeURIComponent(b)+'&durasi='+encodeURIComponent(c)+'">');}
 function runSSW(){var u=document.getElementById('f1').value.trim();if(!u)return alert('Isi!');var x=api('screenshot.php')+'&url='+encodeURIComponent(u);setH('<b>✅ Screenshot</b><img src="'+x+'"><a class="dl" href="'+x+'" target="_blank">🔗 Buka di Tab Baru</a>');}
