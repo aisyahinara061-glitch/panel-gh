@@ -13,12 +13,6 @@
       "expired": "2026-9-30"
     },
     {
-      "nama": "admin",
-      "password": "54321",
-      "role": "owner",
-      "expired": null
-    },
-    {
       "nama": "Lanz",
       "password": "210113",
       "role": "reseller",
