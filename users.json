@@ -23,6 +23,12 @@
       "password": "210113",
       "role": "reseller",
       "expired": "2026-9-20"
+    },
+    {
+      "nama": "Boy",
+      "password": "12345",
+      "role": "owner",
+      "expired": "2026-9-19"
     }
   ]
 }
